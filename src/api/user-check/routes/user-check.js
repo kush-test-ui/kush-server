@@ -2,8 +2,8 @@ module.exports = {
   routes: [
     {
       method: 'POST',
-      path: '/check',
-      handler: 'user-existence.check',
+      path: '/user-check',
+      handler: 'user-check.findUser',
     },
   ],
 };
