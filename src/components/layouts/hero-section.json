@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_layouts_hero_sections",
+  "info": {
+    "displayName": "Hero",
+    "icon": "stack",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "elements.link"
+    }
+  }
+}
