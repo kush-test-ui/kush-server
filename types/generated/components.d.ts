@@ -30,10 +30,13 @@ export interface LayoutsHeader extends Schema.Component {
   collectionName: 'components_layouts_headers';
   info: {
     displayName: 'Header';
+    description: '';
   };
   attributes: {
     logoText: Attribute.Component<'elements.link'>;
     ctaButton: Attribute.Component<'elements.link'>;
+    sessionLinks: Attribute.Component<'elements.link', true> &
+      Attribute.Required;
   };
 }
 

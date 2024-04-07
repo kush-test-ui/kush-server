@@ -1,7 +1,6 @@
 module.exports = [
   'strapi::logger',
   'strapi::errors',
-  'strapi::security',
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::query',
@@ -9,4 +8,24 @@ module.exports = [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        directives: {
+          "script-src": ["'self'", "editor.unlayer.com"],
+          "script-src-elem": ["'self'", "editor.unlayer.com"],
+          "frame-src": ["'self'", "editor.unlayer.com"],
+          "img-src": [
+            "'self'",
+            "data:",
+            "market-assets.strapi.io",
+            "cdn.jsdelivr.net",
+            "strapi.io",
+            "s3.amazonaws.com",
+          ],
+        },
+      },
+    },
+  }
 ];
