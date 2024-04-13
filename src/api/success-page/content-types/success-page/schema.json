@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "globals",
+  "collectionName": "success_pages",
   "info": {
-    "singularName": "global",
-    "pluralName": "globals",
-    "displayName": "Global page",
+    "singularName": "success-page",
+    "pluralName": "success-pages",
+    "displayName": "Success page",
     "description": ""
   },
   "options": {
@@ -16,19 +16,23 @@
     }
   },
   "attributes": {
-    "header": {
-      "displayName": "Header",
-      "type": "component",
-      "repeatable": false,
+    "title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "layouts.header"
+      "type": "string"
     },
-    "footer": {
-      "displayName": "footer",
+    "description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "redirectUrl": {
       "type": "component",
       "repeatable": false,
       "pluginOptions": {
@@ -36,7 +40,7 @@
           "localized": true
         }
       },
-      "component": "layouts.footer"
+      "component": "elements.link"
     }
   }
 }

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_complex_providers",
+  "info": {
+    "displayName": "Providers",
+    "icon": "shield",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "key": {
+      "type": "enumeration",
+      "enum": [
+        "google",
+        "facebook",
+        "instagram"
+      ],
+      "default": "google"
+    }
+  }
+}

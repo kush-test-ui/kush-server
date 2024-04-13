@@ -1,5 +1,46 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface ComplexProviders extends Schema.Component {
+  collectionName: 'components_complex_providers';
+  info: {
+    displayName: 'Providers';
+    icon: 'shield';
+    description: '';
+  };
+  attributes: {
+    text: Attribute.String;
+    key: Attribute.Enumeration<['google', 'facebook', 'instagram']> &
+      Attribute.DefaultTo<'google'>;
+  };
+}
+
+export interface ElementsButton extends Schema.Component {
+  collectionName: 'components_elements_buttons';
+  info: {
+    displayName: 'Button';
+  };
+  attributes: {
+    type: Attribute.String;
+    text: Attribute.String;
+    loadingText: Attribute.String;
+  };
+}
+
+export interface ElementsInput extends Schema.Component {
+  collectionName: 'components_elements_inputs';
+  info: {
+    displayName: 'Input';
+    icon: 'pencil';
+    description: '';
+  };
+  attributes: {
+    label: Attribute.String;
+    placeholder: Attribute.String;
+    name: Attribute.String;
+    type: Attribute.String;
+  };
+}
+
 export interface ElementsLink extends Schema.Component {
   collectionName: 'components_elements_links';
   info: {
@@ -58,6 +99,9 @@ export interface LayoutsHeroSection extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'complex.providers': ComplexProviders;
+      'elements.button': ElementsButton;
+      'elements.input': ElementsInput;
       'elements.link': ElementsLink;
       'layouts.footer': LayoutsFooter;
       'layouts.header': LayoutsHeader;
