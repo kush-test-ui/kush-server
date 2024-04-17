@@ -1197,7 +1197,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
         };
       }>;
     cover: Attribute.Media &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
