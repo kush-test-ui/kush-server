@@ -1,2 +1,3 @@
 #!/bin/bash
-docker-compose up -d --build
+echo $UID > /tmp/tests
+# docker-compose up -d --build
