@@ -2,8 +2,7 @@ version: "3"
 
 services:
   kush-backend:
-    build:
-      context: .
+    image: kush-e-commerce-back:$GITHUB_RUN_ID
     ports:
     - "1337:1337"
     restart: always
