@@ -23,6 +23,7 @@ services:
       DATABASE_PASSWORD: $DATABASE_PASSWORD
       DATABASE_SSL: $DATABASE_SSL
       SMTP_PASSWORD: $SMTP_PASSWORD
+      PUBLIC_URL: $PUBLIC_URL
   kush-postgres:
     image: postgres:latest
     restart: always
