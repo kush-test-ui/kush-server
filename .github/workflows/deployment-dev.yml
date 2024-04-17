@@ -8,10 +8,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      - uses: hoverkraft-tech/compose-action@v2.0.0
-        with:
-          # compose-flags: "up"
-          up-flags: "-d --build"
+      - name: Test
+        run: ./ci/deploy.sh
         env:
           APP_KEYS: ${{ secrets.APP_KEYS }}
           HOST: 0.0.0.0
