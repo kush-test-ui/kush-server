@@ -1,0 +1,6 @@
+Dockerfile
+.dockerignore
+docker-compose.yml
+ci/*
+.github/workflows/*
+.git/*
