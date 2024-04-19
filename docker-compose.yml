@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  kush-backend:
+    image: kush-e-commerce-back:$GITHUB_RUN_ID
+    ports:
+    - "1337:1337"
+    restart: always
+    environment:
+      APP_KEYS: $APP_KEYS
+      HOST: $HOST
+      PORT: $PORT
+      API_TOKEN_SALT: $API_TOKEN_SALT
+      ADMIN_JWT_SECRET: $ADMIN_JWT_SECRET
+      JWT_SECRET: $JWT_SECRET
+      TRANSFER_TOKEN_SALT: $TRANSFER_TOKEN_SALT
+      DATABASE_CLIENT: $DATABASE_CLIENT
+      DATABASE_HOST: $DATABASE_HOST
+      DATABASE_PORT: $DATABASE_PORT
+      DATABASE_NAME: $DATABASE_NAME
+      DATABASE_USERNAME: $DATABASE_USERNAME
+      DATABASE_PASSWORD: $DATABASE_PASSWORD
+      DATABASE_SSL: $DATABASE_SSL
+      SMTP_PASSWORD: $SMTP_PASSWORD
+      PUBLIC_URL: $PUBLIC_URL
+  kush-postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=$DATABASE_USERNAME
+      - POSTGRES_PASSWORD=$DATABASE_PASSWORD
+      - POSTGRES_DB=$DATABASE_NAME
+    volumes:
+      - db:/var/lib/postgres
+      - strapi_data:/app/public
+
+volumes:
+  db:
+  strapi_data:
+
