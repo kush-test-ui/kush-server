@@ -1,5 +1,20 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface ComplexProfileForm extends Schema.Component {
+  collectionName: 'components_complex_profile_forms';
+  info: {
+    displayName: 'Profile Form';
+    icon: 'shield';
+    description: '';
+  };
+  attributes: {
+    general: Attribute.Component<'elements.input', true>;
+    additional: Attribute.Component<'elements.input', true>;
+    actions: Attribute.Component<'elements.button', true>;
+    avatar: Attribute.Media;
+  };
+}
+
 export interface ComplexProviders extends Schema.Component {
   collectionName: 'components_complex_providers';
   info: {
@@ -99,6 +114,7 @@ export interface LayoutsHeroSection extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'complex.profile-form': ComplexProfileForm;
       'complex.providers': ComplexProviders;
       'elements.button': ElementsButton;
       'elements.input': ElementsInput;
