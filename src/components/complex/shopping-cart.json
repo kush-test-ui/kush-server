@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_complex_shopping_carts",
+  "info": {
+    "displayName": "Shopping Cart",
+    "icon": "shoppingCart"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "totalPrice": {
+      "type": "string"
+    },
+    "checkout": {
+      "type": "string"
+    },
+    "getBack": {
+      "type": "string"
+    },
+    "emptyList": {
+      "type": "string"
+    }
+  }
+}

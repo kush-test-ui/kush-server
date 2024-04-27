@@ -37,6 +37,16 @@
         }
       },
       "component": "layouts.footer"
+    },
+    "shoppingCart": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "complex.shopping-cart"
     }
   }
 }

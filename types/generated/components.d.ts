@@ -29,6 +29,21 @@ export interface ComplexProviders extends Schema.Component {
   };
 }
 
+export interface ComplexShoppingCart extends Schema.Component {
+  collectionName: 'components_complex_shopping_carts';
+  info: {
+    displayName: 'Shopping Cart';
+    icon: 'shoppingCart';
+  };
+  attributes: {
+    title: Attribute.String;
+    totalPrice: Attribute.String;
+    checkout: Attribute.String;
+    getBack: Attribute.String;
+    emptyList: Attribute.String;
+  };
+}
+
 export interface ElementsButton extends Schema.Component {
   collectionName: 'components_elements_buttons';
   info: {
@@ -116,6 +131,7 @@ declare module '@strapi/types' {
     export interface Components {
       'complex.profile-form': ComplexProfileForm;
       'complex.providers': ComplexProviders;
+      'complex.shopping-cart': ComplexShoppingCart;
       'elements.button': ElementsButton;
       'elements.input': ElementsInput;
       'elements.link': ElementsLink;
