@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "globals",
+  "collectionName": "profile_pages",
   "info": {
-    "singularName": "global",
-    "pluralName": "globals",
-    "displayName": "Global page",
+    "singularName": "profile-page",
+    "pluralName": "profile-pages",
+    "displayName": "Profile page",
     "description": ""
   },
   "options": {
@@ -16,29 +16,23 @@
     }
   },
   "attributes": {
-    "header": {
-      "displayName": "Header",
-      "type": "component",
-      "repeatable": false,
+    "title": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "layouts.header"
+      "type": "string"
     },
-    "footer": {
-      "displayName": "footer",
-      "type": "component",
-      "repeatable": false,
+    "description": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "layouts.footer"
+      "type": "string"
     },
-    "shoppingCart": {
+    "formFields": {
       "type": "component",
       "repeatable": false,
       "pluginOptions": {
@@ -46,7 +40,7 @@
           "localized": true
         }
       },
-      "component": "complex.shopping-cart"
+      "component": "complex.profile-form"
     }
   }
 }

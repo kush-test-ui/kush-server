@@ -791,7 +791,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -820,6 +819,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    firstName: Attribute.String;
+    lastName: Attribute.String;
+    phoneNumber: Attribute.Integer;
+    deliveryAddress: Attribute.String;
+    billingAddress: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -995,6 +999,12 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
         };
       }>;
     footer: Attribute.Component<'layouts.footer'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    shoppingCart: Attribute.Component<'complex.shopping-cart'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1197,7 +1207,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
         };
       }>;
     cover: Attribute.Media &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1216,12 +1225,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    price: Attribute.Decimal &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     categories: Attribute.Relation<
       'api::product.product',
       'manyToMany',
@@ -1232,6 +1235,26 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'manyToMany',
       'api::sub-category.sub-category'
     >;
+    currency: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.DefaultTo<'USD'>;
+    unitAmount: Attribute.BigInteger &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    price: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1308,6 +1331,65 @@ export interface ApiProductsPageProductsPage extends Schema.SingleType {
       'api::products-page.products-page',
       'oneToMany',
       'api::products-page.products-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiProfilePageProfilePage extends Schema.SingleType {
+  collectionName: 'profile_pages';
+  info: {
+    singularName: 'profile-page';
+    pluralName: 'profile-pages';
+    displayName: 'Profile page';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    formFields: Attribute.Component<'complex.profile-form'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::profile-page.profile-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::profile-page.profile-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::profile-page.profile-page',
+      'oneToMany',
+      'api::profile-page.profile-page'
     >;
     locale: Attribute.String;
   };
@@ -1564,6 +1646,7 @@ declare module '@strapi/types' {
       'api::login-page.login-page': ApiLoginPageLoginPage;
       'api::product.product': ApiProductProduct;
       'api::products-page.products-page': ApiProductsPageProductsPage;
+      'api::profile-page.profile-page': ApiProfilePageProfilePage;
       'api::registration-page.registration-page': ApiRegistrationPageRegistrationPage;
       'api::reset-page.reset-page': ApiResetPageResetPage;
       'api::sub-category.sub-category': ApiSubCategorySubCategory;

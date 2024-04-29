@@ -1,8 +1,9 @@
 name: Push
 on:
   push:
-    paths-ignore:
-      - '.github/workflows/*'
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 jobs:
   test:
     runs-on: self-hosted
@@ -27,3 +28,6 @@ jobs:
           DATABASE_SSL: false
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           PUBLIC_URL: https://dev.kush-test.pp.ua/strapi
+          CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
+          CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
+          CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}

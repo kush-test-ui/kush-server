@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_complex_profile_forms",
+  "info": {
+    "displayName": "Profile Form",
+    "icon": "shield",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "general": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.input"
+    },
+    "additional": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.input"
+    },
+    "actions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.button"
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

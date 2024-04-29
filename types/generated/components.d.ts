@@ -1,5 +1,20 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface ComplexProfileForm extends Schema.Component {
+  collectionName: 'components_complex_profile_forms';
+  info: {
+    displayName: 'Profile Form';
+    icon: 'shield';
+    description: '';
+  };
+  attributes: {
+    general: Attribute.Component<'elements.input', true>;
+    additional: Attribute.Component<'elements.input', true>;
+    actions: Attribute.Component<'elements.button', true>;
+    avatar: Attribute.Media;
+  };
+}
+
 export interface ComplexProviders extends Schema.Component {
   collectionName: 'components_complex_providers';
   info: {
@@ -11,6 +26,21 @@ export interface ComplexProviders extends Schema.Component {
     text: Attribute.String;
     key: Attribute.Enumeration<['google', 'facebook', 'instagram']> &
       Attribute.DefaultTo<'google'>;
+  };
+}
+
+export interface ComplexShoppingCart extends Schema.Component {
+  collectionName: 'components_complex_shopping_carts';
+  info: {
+    displayName: 'Shopping Cart';
+    icon: 'shoppingCart';
+  };
+  attributes: {
+    title: Attribute.String;
+    totalPrice: Attribute.String;
+    checkout: Attribute.String;
+    getBack: Attribute.String;
+    emptyList: Attribute.String;
   };
 }
 
@@ -99,7 +129,9 @@ export interface LayoutsHeroSection extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'complex.profile-form': ComplexProfileForm;
       'complex.providers': ComplexProviders;
+      'complex.shopping-cart': ComplexShoppingCart;
       'elements.button': ElementsButton;
       'elements.input': ElementsInput;
       'elements.link': ElementsLink;

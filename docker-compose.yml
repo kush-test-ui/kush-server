@@ -23,6 +23,9 @@ services:
       DATABASE_SSL: $DATABASE_SSL
       SMTP_PASSWORD: $SMTP_PASSWORD
       PUBLIC_URL: $PUBLIC_URL
+      CLOUDINARY_NAME: $CLOUDINARY_NAME
+      CLOUDINARY_KEY: $CLOUDINARY_KEY
+      CLOUDINARY_SECRET: $CLOUDINARY_SECRET
   kush-postgres:
     image: postgres:latest
     restart: always
