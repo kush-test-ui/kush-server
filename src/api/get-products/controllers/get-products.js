@@ -2,7 +2,7 @@
 
 module.exports = {
   getProducts: async (ctx) => {
-    const { page = 1, pageSize = 5, sort = 'id:ASC', id, name = '' } = ctx.query;
+    const { page = 1, pageSize = 5, sort = 'id:ASC', id, name = '', locale = 'uk' } = ctx.query;
 
     try {
       const productPage = await strapi.entityService.findOne(
@@ -11,6 +11,7 @@ module.exports = {
         { 
         populate: { 
           products: {
+            locale,
             populate: {
               cover: { fields: ['url', 'alternativeText'] },
               images: { fields: ['url', 'alternativeText'] },
@@ -22,6 +23,7 @@ module.exports = {
             },
           } 
         }, 
+        locale,
         sort
       });
 
