@@ -1,5 +1,20 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface ComplexHeroSection extends Schema.Component {
+  collectionName: 'components_layouts_hero_sections';
+  info: {
+    displayName: 'Hero';
+    icon: 'stack';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    image: Attribute.Media;
+    link: Attribute.Component<'elements.link'>;
+  };
+}
+
 export interface ComplexProfileForm extends Schema.Component {
   collectionName: 'components_complex_profile_forms';
   info: {
@@ -80,7 +95,7 @@ export interface ElementsLink extends Schema.Component {
   };
   attributes: {
     url: Attribute.String & Attribute.Required;
-    text: Attribute.Text;
+    text: Attribute.String;
     isExternal: Attribute.Boolean & Attribute.DefaultTo<false>;
   };
 }
@@ -108,21 +123,6 @@ export interface LayoutsHeader extends Schema.Component {
     ctaButton: Attribute.Component<'elements.link'>;
     sessionLinks: Attribute.Component<'elements.link', true> &
       Attribute.Required;
-  };
-}
-
-export interface LayoutsHeroSection extends Schema.Component {
-  collectionName: 'components_layouts_hero_sections';
-  info: {
-    displayName: 'Hero';
-    icon: 'stack';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    image: Attribute.Media;
-    link: Attribute.Component<'elements.link'>;
   };
 }
 
@@ -180,6 +180,7 @@ export interface SharedSeo extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'complex.hero-section': ComplexHeroSection;
       'complex.profile-form': ComplexProfileForm;
       'complex.providers': ComplexProviders;
       'complex.shopping-cart': ComplexShoppingCart;
@@ -188,7 +189,6 @@ declare module '@strapi/types' {
       'elements.link': ElementsLink;
       'layouts.footer': LayoutsFooter;
       'layouts.header': LayoutsHeader;
-      'layouts.hero-section': LayoutsHeroSection;
       'shared.meta-social': SharedMetaSocial;
       'shared.seo': SharedSeo;
     }

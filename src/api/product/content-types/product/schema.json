@@ -119,6 +119,20 @@
         }
       },
       "type": "string"
+    },
+    "code": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "GS14",
+        "PS14",
+        "GW14",
+        "GC14"
+      ]
     }
   }
 }

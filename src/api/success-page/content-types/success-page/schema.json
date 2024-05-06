@@ -16,6 +16,26 @@
     }
   },
   "attributes": {
+    "redirectUrl": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "elements.link"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.seo"
+    },
     "title": {
       "pluginOptions": {
         "i18n": {
@@ -31,16 +51,6 @@
         }
       },
       "type": "string"
-    },
-    "redirectUrl": {
-      "type": "component",
-      "repeatable": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "elements.link"
     }
   }
 }
