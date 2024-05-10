@@ -1105,11 +1105,11 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
   };
 }
 
-export interface ApiHomePageHomePage extends Schema.SingleType {
-  collectionName: 'home_pages';
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
   info: {
-    singularName: 'home-page';
-    pluralName: 'home-pages';
+    singularName: 'home';
+    pluralName: 'homes';
     displayName: 'Home page';
     description: '';
   };
@@ -1123,6 +1123,7 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
   };
   attributes: {
     blocks: Attribute.DynamicZone<['complex.hero-section']> &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1137,22 +1138,14 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::home-page.home-page',
-      'oneToOne',
-      'admin::user'
-    > &
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::home-page.home-page',
-      'oneToOne',
-      'admin::user'
-    > &
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     localizations: Attribute.Relation<
-      'api::home-page.home-page',
+      'api::home.home',
       'oneToMany',
-      'api::home-page.home-page'
+      'api::home.home'
     >;
     locale: Attribute.String;
   };
@@ -1715,7 +1708,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::forgot-page.forgot-page': ApiForgotPageForgotPage;
       'api::global.global': ApiGlobalGlobal;
-      'api::home-page.home-page': ApiHomePageHomePage;
+      'api::home.home': ApiHomeHome;
       'api::login-page.login-page': ApiLoginPageLoginPage;
       'api::product.product': ApiProductProduct;
       'api::products-page.products-page': ApiProductsPageProductsPage;

@@ -1,9 +1,9 @@
 {
   "kind": "singleType",
-  "collectionName": "home_pages",
+  "collectionName": "homes",
   "info": {
-    "singularName": "home-page",
-    "pluralName": "home-pages",
+    "singularName": "home",
+    "pluralName": "homes",
     "displayName": "Home page",
     "description": ""
   },
@@ -25,7 +25,8 @@
       "type": "dynamiczone",
       "components": [
         "complex.hero-section"
-      ]
+      ],
+      "required": true
     },
     "seo": {
       "type": "component",
