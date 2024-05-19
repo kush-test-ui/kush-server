@@ -79,6 +79,15 @@
     },
     "billingAddress": {
       "type": "string"
+    },
+    "stripeCustomerId": {
+      "type": "string"
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order.order",
+      "mappedBy": "user"
     }
   }
 }
