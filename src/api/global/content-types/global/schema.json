@@ -27,17 +27,6 @@
       },
       "component": "layouts.header"
     },
-    "footer": {
-      "displayName": "footer",
-      "type": "component",
-      "repeatable": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "layouts.footer"
-    },
     "shoppingCart": {
       "type": "component",
       "repeatable": false,
@@ -47,6 +36,16 @@
         }
       },
       "component": "complex.shopping-cart"
+    },
+    "footer": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "layouts.footer"
     }
   }
 }

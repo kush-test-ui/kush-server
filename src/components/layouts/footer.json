@@ -1,22 +1,48 @@
 {
   "collectionName": "components_layouts_footers",
   "info": {
-    "displayName": "footer"
+    "displayName": "Footer",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "logoText": {
+    "formField": {
       "type": "component",
       "repeatable": false,
-      "component": "elements.link"
+      "component": "elements.input"
     },
-    "text": {
-      "type": "text"
-    },
-    "socialLink": {
+    "termsLink": {
       "type": "component",
       "repeatable": true,
       "component": "elements.link"
+    },
+    "linksGroupTitle": {
+      "type": "string"
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.link"
+    },
+    "contactGroupTitle": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "socialGroupTitle": {
+      "type": "string"
+    },
+    "socialLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.social-link"
+    },
+    "primaryPhone": {
+      "type": "string"
+    },
+    "secondaryPhone": {
+      "type": "string"
     }
   }
 }

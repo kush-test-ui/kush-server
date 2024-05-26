@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_elements_social_links",
+  "info": {
+    "displayName": "socialLink",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "format": {
+      "type": "enumeration",
+      "enum": [
+        "facebook",
+        "instagram",
+        "tiktok"
+      ]
+    },
+    "url": {
+      "type": "string"
+    },
+    "isExternal": {
+      "type": "boolean"
+    }
+  }
+}

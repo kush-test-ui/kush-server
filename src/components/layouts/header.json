@@ -11,7 +11,7 @@
       "repeatable": false,
       "component": "elements.link"
     },
-    "ctaButton": {
+    "cta": {
       "type": "component",
       "repeatable": false,
       "component": "elements.link"
@@ -21,6 +21,11 @@
       "repeatable": true,
       "component": "elements.link",
       "required": true
+    },
+    "pages": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.link"
     }
   }
 }
