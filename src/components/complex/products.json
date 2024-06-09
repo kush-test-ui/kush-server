@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_complex_products",
+  "info": {
+    "displayName": "Products",
+    "icon": "dashboard",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_complex_spotlights",
+  "info": {
+    "displayName": "Spotlight",
+    "icon": "archive",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}

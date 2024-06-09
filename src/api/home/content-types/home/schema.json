@@ -24,7 +24,9 @@
       },
       "type": "dynamiczone",
       "components": [
-        "complex.hero-section"
+        "complex.hero-section",
+        "complex.spotlight",
+        "complex.products"
       ],
       "required": true
     },
