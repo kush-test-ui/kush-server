@@ -139,6 +139,12 @@
       },
       "type": "json",
       "required": true
+    },
+    "collections": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::collection.collection",
+      "inversedBy": "products"
     }
   }
 }

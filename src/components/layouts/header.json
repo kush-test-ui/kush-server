@@ -26,6 +26,28 @@
       "type": "component",
       "repeatable": true,
       "component": "elements.link"
+    },
+    "collections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::collection.collection"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    },
+    "categoryTitle": {
+      "type": "string"
+    },
+    "collectionTitle": {
+      "type": "string"
+    },
+    "pagesTitle": {
+      "type": "string"
+    },
+    "searchTitle": {
+      "type": "string"
     }
   }
 }
