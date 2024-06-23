@@ -71,9 +71,6 @@
     "lastName": {
       "type": "string"
     },
-    "phoneNumber": {
-      "type": "integer"
-    },
     "deliveryAddress": {
       "type": "string"
     },
@@ -88,6 +85,9 @@
       "relation": "oneToMany",
       "target": "api::order.order",
       "mappedBy": "user"
+    },
+    "phoneNumber": {
+      "type": "string"
     }
   }
 }
