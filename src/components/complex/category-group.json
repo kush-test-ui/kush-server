@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_complex_category_groups",
+  "info": {
+    "displayName": "Category Group",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    }
+  }
+}

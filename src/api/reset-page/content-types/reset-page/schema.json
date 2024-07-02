@@ -36,6 +36,20 @@
       },
       "component": "elements.button"
     },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
     "seo": {
       "type": "component",
       "repeatable": false,
@@ -45,6 +59,14 @@
         }
       },
       "component": "shared.seo"
+    },
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }

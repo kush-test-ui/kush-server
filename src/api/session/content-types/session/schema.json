@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sessions",
+  "info": {
+    "singularName": "session",
+    "pluralName": "sessions",
+    "displayName": "Session",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "refreshToken": {
+      "type": "text",
+      "required": true
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "session"
+    }
+  }
+}

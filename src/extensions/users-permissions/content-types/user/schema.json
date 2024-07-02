@@ -88,6 +88,19 @@
     },
     "phoneNumber": {
       "type": "string"
+    },
+    "avatar": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "session": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::session.session",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

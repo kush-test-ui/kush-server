@@ -24,10 +24,31 @@
       },
       "type": "string"
     },
-    "categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category"
+    "blocks": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "complex.collection-group",
+        "complex.category-group"
+      ]
+    },
+    "cover": {
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true
     },
     "seo": {
       "type": "component",
@@ -38,21 +59,6 @@
         }
       },
       "component": "shared.seo"
-    },
-    "cover": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      }
     }
   }
 }
