@@ -58,4 +58,42 @@ module.exports = {
       ctx.badRequest(err)
     }
   },
-};
+  async isUserExist(ctx) {
+    const { email } = ctx.request.body;
+    try {
+      const user = await strapi.query("plugin::users-permissions.user").findOne({
+        where: { email },
+      });
+    
+      if (user) {
+        const jwt = {
+          accessToken: strapi.plugins['users-permissions'].services.jwt.issue({ 
+          id: user.id, 
+          firstName:user.firstName, 
+          lastName:user.lastName, 
+          phoneNumber:user.phoneNumber, 
+          deliveryAddress:user.deliveryAddress, 
+          stripeCustomerId:user.stripeCustomerId,
+          blocked:user.blocked,  
+          confirmed:user.confirmed,
+          provider:user.provider
+          }, 
+        { expiresIn: '14d' }),
+      };
+  
+      ctx.send({ 
+        jwt,
+        id:user.id,
+        picture:user?.avatar,
+        username:user.username,
+        exist:true,
+        status: 200 
+        }, 200)
+      } else {
+        ctx.send({ message: 'User does not exist', exist:false, status: 200 }, 200);
+      }
+    } catch (err) {
+      ctx.badRequest('Error checking user existence', { details: err });
+    }
+  }
+}

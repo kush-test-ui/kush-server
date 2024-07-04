@@ -48,6 +48,11 @@
     },
     "searchTitle": {
       "type": "string"
+    },
+    "signOutTitle": {
+      "type": "string",
+      "default": "Sign out",
+      "required": true
     }
   }
 }
