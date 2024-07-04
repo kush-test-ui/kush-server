@@ -10,15 +10,6 @@ module.exports = {
   async signIn(ctx) {
     const { identifier, password, locale, remember } = ctx.request.body;
 
-    if (!identifier || !password) {
-      return ctx.badRequest(
-        null,
-        ctx.request.admin
-          ? [{ messages: [{ id: 'Auth.form.error.email.provide' }] }]
-          : [{ messages: [{ id: 'Auth.form.error.invalid' }] }]
-      );
-    }
-
     try {
       const user = await strapi.query("plugin::users-permissions.user").findOne({
         where: { email:identifier },
