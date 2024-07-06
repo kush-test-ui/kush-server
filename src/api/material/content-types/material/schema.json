@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "materials",
+  "info": {
+    "singularName": "material",
+    "pluralName": "materials",
+    "displayName": "Material",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "pluginOptions": {}
+    },
+    "materials": {
+      "type": "enumeration",
+      "enum": [
+        "gold",
+        "silver ",
+        "platinum",
+        "palladium",
+        "titanium",
+        "tungsten",
+        "stainless",
+        "copper",
+        "bronze",
+        "brass"
+      ],
+      "pluginOptions": {}
+    }
+  }
+}

@@ -76,22 +76,6 @@
       "default": "0",
       "required": true
     },
-    "code": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "GS14",
-        "PS14",
-        "GW14",
-        "GC14",
-        "SS18",
-        "SG18"
-      ]
-    },
     "category": {
       "pluginOptions": {
         "i18n": {
@@ -131,20 +115,26 @@
       "type": "integer",
       "default": 0
     },
-    "available_colors": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "type": "json",
-      "required": true
-    },
     "collections": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::collection.collection",
       "inversedBy": "products"
+    },
+    "colors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::color.color"
+    },
+    "materials": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::material.material"
+    },
+    "sizes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::size.size"
     }
   }
 }

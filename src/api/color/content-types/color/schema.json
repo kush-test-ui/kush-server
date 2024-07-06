@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "colors",
+  "info": {
+    "singularName": "color",
+    "pluralName": "colors",
+    "displayName": "Color",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "colors": {
+      "type": "enumeration",
+      "enum": [
+        "green",
+        "yellow",
+        "white",
+        "purple",
+        "black",
+        "grey"
+      ]
+    }
+  }
+}
