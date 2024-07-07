@@ -72,9 +72,11 @@
           "localized": false
         }
       },
-      "type": "biginteger",
-      "default": "0",
-      "required": true
+      "type": "decimal",
+      "default": 1,
+      "required": true,
+      "min": 0,
+      "max": 3000
     },
     "category": {
       "pluginOptions": {

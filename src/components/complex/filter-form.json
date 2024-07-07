@@ -1,0 +1,52 @@
+{
+  "collectionName": "components_complex_filter_forms",
+  "info": {
+    "displayName": "Filter Form",
+    "icon": "cog"
+  },
+  "options": {},
+  "attributes": {
+    "categoryFields": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.input"
+    },
+    "materiaFields": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.input"
+    },
+    "sizeFields": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.input"
+    },
+    "sortFields": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.input"
+    },
+    "category": {
+      "type": "string"
+    },
+    "material": {
+      "type": "string"
+    },
+    "size": {
+      "type": "string"
+    },
+    "price": {
+      "type": "string"
+    },
+    "submitBtn": {
+      "type": "component",
+      "repeatable": false,
+      "component": "elements.button"
+    },
+    "resetBtn": {
+      "type": "component",
+      "repeatable": false,
+      "component": "elements.button"
+    }
+  }
+}

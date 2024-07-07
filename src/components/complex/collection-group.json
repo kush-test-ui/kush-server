@@ -1,8 +1,9 @@
 {
   "collectionName": "components_complex_collection_groups",
   "info": {
-    "displayName": "Collection Group",
-    "icon": "bulletList"
+    "displayName": "Collection",
+    "icon": "bulletList",
+    "description": ""
   },
   "options": {},
   "attributes": {
