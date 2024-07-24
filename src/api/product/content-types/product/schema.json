@@ -137,6 +137,21 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::size.size"
+    },
+    "color": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "White",
+        "Yellow",
+        "Blue",
+        "Green",
+        "Red"
+      ]
     }
   }
 }
