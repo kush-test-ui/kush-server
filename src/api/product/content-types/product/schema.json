@@ -36,7 +36,7 @@
     "quantity": {
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       },
       "type": "integer"
@@ -60,7 +60,7 @@
     "available": {
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       },
       "type": "boolean",
@@ -69,7 +69,7 @@
     "price": {
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       },
       "type": "decimal",
@@ -81,7 +81,7 @@
     "category": {
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       },
       "type": "enumeration",
@@ -111,7 +111,7 @@
     "saleValue": {
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       },
       "type": "integer",
@@ -141,7 +141,7 @@
     "color": {
       "pluginOptions": {
         "i18n": {
-          "localized": false
+          "localized": true
         }
       },
       "type": "enumeration",
@@ -152,6 +152,12 @@
         "Green",
         "Red"
       ]
+    },
+    "slug": {
+      "pluginOptions": {},
+      "type": "uid",
+      "targetField": "title",
+      "required": true
     }
   }
 }
