@@ -20,8 +20,8 @@ module.exports = ({ env }) => ({
         apiKey: "re_4JrtYSot_8PbZoLo2EUCsZA9uJErKkKH6",
       },
       settings: {
-        defaultFrom: 'onboarding@resend.dev',
-        defaultReplyTo: 'onboarding@resend.dev',
+        defaultFrom: 'noreply@kush.com',
+        defaultReplyTo: 'noreply@kush.com',
       },
     }
   },
