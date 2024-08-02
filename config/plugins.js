@@ -17,7 +17,7 @@ module.exports = ({ env }) => ({
     config: {
       provider: 'strapi-provider-email-resend',
       providerOptions: {
-        apiKey: "re_4JrtYSot_8PbZoLo2EUCsZA9uJErKkKH6",
+        apiKey: "re_PJQPr37h_AGk3XNdS82RFAv6DeEjgB5Fs",
       },
       settings: {
         defaultFrom: 'noreply@kush.com',
