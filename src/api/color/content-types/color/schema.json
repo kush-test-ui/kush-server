@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {}
     },
     "colors": {
       "type": "enumeration",
@@ -24,7 +25,8 @@
         "purple",
         "black",
         "grey"
-      ]
+      ],
+      "pluginOptions": {}
     }
   }
 }

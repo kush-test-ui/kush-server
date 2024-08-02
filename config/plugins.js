@@ -17,7 +17,7 @@ module.exports = ({ env }) => ({
     config: {
       provider: 'strapi-provider-email-resend',
       providerOptions: {
-        apiKey: env('SMTP_PASSWORD'),
+        apiKey: "re_4JrtYSot_8PbZoLo2EUCsZA9uJErKkKH6",
       },
       settings: {
         defaultFrom: 'onboarding@resend.dev',

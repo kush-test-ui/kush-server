@@ -26,7 +26,7 @@ jobs:
           DATABASE_USERNAME: strapi_admin
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DATABASE_SSL: false
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_PASSWORD: re_4JrtYSot_8PbZoLo2EUCsZA9uJErKkKH6
           PUBLIC_URL: https://dev.kush-test.pp.ua/strapi
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
