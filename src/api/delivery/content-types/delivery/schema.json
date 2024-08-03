@@ -4,7 +4,8 @@
   "info": {
     "singularName": "delivery",
     "pluralName": "deliveries",
-    "displayName": "Delivery"
+    "displayName": "Delivery",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -30,6 +31,16 @@
         }
       },
       "type": "text"
+    },
+    "rules": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "complex.delivery-rule"
     }
   }
 }

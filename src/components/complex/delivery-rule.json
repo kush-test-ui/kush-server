@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_complex_delivery_rules",
+  "info": {
+    "displayName": "Delivery Rule",
+    "icon": "archive",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "clock",
+        "protect",
+        "delivery"
+      ]
+    }
+  }
+}
