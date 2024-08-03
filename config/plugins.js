@@ -20,8 +20,8 @@ module.exports = ({ env }) => ({
         apiKey: "re_PJQPr37h_AGk3XNdS82RFAv6DeEjgB5Fs",
       },
       settings: {
-        defaultFrom: 'noreply@kush.com',
-        defaultReplyTo: 'noreply@kush.com',
+        defaultFrom: 'no-reply@kush-ecommerce.online',
+        defaultReplyTo: 'no-reply@kush-ecommerce.online',
       },
     }
   },
