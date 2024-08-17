@@ -27,5 +27,9 @@ module.exports = ({ env }) => ({
   },
   'email-designer': {
     enabled: true,
-  }, 
+  },
+  'google-maps': {
+    enabled: true,
+    resolve: './src/plugins/strapi-google-maps',
+  },
 });
