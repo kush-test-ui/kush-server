@@ -3,15 +3,36 @@
 module.exports = {
   contactUs: async (ctx) => {
     const { email, name, message, locale } = ctx.request.body;
-    try {
+
+    const payload = `<b>Ім'я:</b> ${name}\n<b>Пошта:</b> ${email}\n<b>Повідомлення:</b> ${message}`;
+
+    const response = await fetch(
+      `https://api.telegram.org/bot${process.env.TG_TOKEN}/sendMessage`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: `${process.env.TG_CHAT_ID}`,
+          parse_mode: 'HTML',
+          text: payload,
+        }),
+      }
+    );
+
+    const result = await response.json();
+
+    if (result.ok) {
       ctx.send({
         message:
           locale === 'uk'
             ? 'Ваше повідомлення було надіслано.'
             : 'Your message was send.',
       });
-    } catch (err) {
-      ctx.body = err;
+    } else {
+      ctx.send({
+        status: result?.error_code || 403,
+        message: result?.message || 'System error',
+      });
     }
   },
 };
