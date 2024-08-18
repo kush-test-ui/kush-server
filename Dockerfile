@@ -4,7 +4,7 @@ RUN install -d -o node -g node -m 0755 /app
 RUN mkdir -p /app/dist /app/.cache
 WORKDIR /app
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn
 
 FROM node:20.9.0-alpine AS runtime
 EXPOSE 1337
