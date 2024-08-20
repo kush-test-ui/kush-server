@@ -111,15 +111,6 @@
         }
       },
       "component": "shared.seo"
-    },
-    "map": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "customField",
-      "customField": "plugin::google-maps.location-picker"
     }
   }
 }

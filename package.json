@@ -8,11 +8,10 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "webhook": "stripe listen --forward-to localhost:3000/api/webhooks"
+    "webhook":"stripe listen --forward-to localhost:3000/api/webhooks"
   },
   "devDependencies": {},
   "dependencies": {
-    "@amicaldo/strapi-google-maps": "^1.1.5",
     "@koa/bodyparser": "^5.1.1",
     "@strapi/plugin-cloud": "4.24.3",
     "@strapi/plugin-i18n": "4.24.3",
