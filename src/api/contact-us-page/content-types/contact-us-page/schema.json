@@ -82,6 +82,22 @@
       },
       "type": "string"
     },
+    "address": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text"
+    },
+    "markerPosition": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "json"
+    },
     "socialLinks": {
       "type": "component",
       "repeatable": true,
@@ -111,15 +127,6 @@
         }
       },
       "component": "shared.seo"
-    },
-    "map": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "customField",
-      "customField": "plugin::google-maps.location-picker"
     }
   }
 }
