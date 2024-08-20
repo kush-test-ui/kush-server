@@ -16,36 +16,19 @@ module.exports = [
         directives: {
           upgradeInsecureRequests: null,
           'connect-src': ["'self", 'https:', 'http:'],
-          'script-src': [
+          "script-src": ["'self'", "editor.unlayer.com", "unsafe-inline", "https://maps.googleapis.com"],
+          "frame-src": ["'self'", "editor.unlayer.com"],
+          "script-src-elem": ["'self'", "editor.unlayer.com", "https://maps.googleapis.com", 'sha256-gPjlli1HEdLlR0AZTY971/wQVOdSkl9mEinLnxrPpJw='],
+          'media-src': ["'self'", 'data:', 'blob:', 'res.cloudinary.com', 'https://maps.gstatic.com', 'https://maps.googleapis.com'],
+          "img-src": [
             "'self'",
-            'editor.unlayer.com',
-            'unsafe-inline',
-            'https://maps.googleapis.com',
-          ],
-          'frame-src': ["'self'", 'editor.unlayer.com'],
-          'script-src-elem': [
-            "'self'",
-            'editor.unlayer.com',
-            'https://maps.googleapis.com',
-            'sha256-gPjlli1HEdLlR0AZTY971/wQVOdSkl9mEinLnxrPpJw=',
-          ],
-          'media-src': [
-            "'self'",
-            'data:',
+            "data:",
             'blob:',
+            "strapi.io",
+            "cdn.jsdelivr.net",
+            "s3.amazonaws.com",
             'res.cloudinary.com',
-            'https://maps.gstatic.com',
-            'https://maps.googleapis.com',
-          ],
-          'img-src': [
-            "'self'",
-            'data:',
-            'blob:',
-            'strapi.io',
-            'cdn.jsdelivr.net',
-            's3.amazonaws.com',
-            'res.cloudinary.com',
-            'market-assets.strapi.io',
+            "market-assets.strapi.io",
             'https://maps.gstatic.com',
             'https://maps.googleapis.com',
             'khmdb0.google.com',
@@ -71,5 +54,5 @@ module.exports = [
         },
       },
     },
-  },
+  }
 ];
