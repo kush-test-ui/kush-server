@@ -16,19 +16,19 @@ module.exports = [
         directives: {
           upgradeInsecureRequests: null,
           'connect-src': ["'self'", 'https:', 'http:'],
+          'frame-src': ["'self'", 'editor.unlayer.com'],
           'script-src': [
             "'self'",
+            "'unsafe-inline'",
             'editor.unlayer.com',
-            'unsafe-inline',
             'maps.googleapis.com',
           ],
           'script-src-elem': [
             "'self'",
+            "'unsafe-inline'",
             'editor.unlayer.com',
-            'unsafe-inline',
             'maps.googleapis.com',
           ],
-          'frame-src': ["'self'", 'editor.unlayer.com'],
           'media-src': [
             "'self'",
             'data:',
