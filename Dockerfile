@@ -4,7 +4,7 @@ RUN install -d -o node -g node -m 0755 /app
 RUN mkdir -p /app/dist /app/.cache
 WORKDIR /app
 COPY . .
-RUN cd src/plugins/strapi-google-maps && yarn install
+RUN yarn install
 RUN cd /app
 RUN yarn install
 EXPOSE 1337
