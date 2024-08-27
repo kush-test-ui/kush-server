@@ -168,6 +168,12 @@
         }
       },
       "component": "shared.seo"
+    },
+    "wishlist": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::wishlist.wishlist",
+      "inversedBy": "products"
     }
   }
 }

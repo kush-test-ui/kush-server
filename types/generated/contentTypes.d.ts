@@ -871,6 +871,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     phoneNumber: Attribute.String;
     avatar: Attribute.Media;
+    wishlist: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::wishlist.wishlist'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -960,6 +965,64 @@ export interface ApiAboutUsPageAboutUsPage extends Schema.SingleType {
       'api::about-us-page.about-us-page',
       'oneToMany',
       'api::about-us-page.about-us-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiAuthNotificationAuthNotification extends Schema.SingleType {
+  collectionName: 'auth_notifications';
+  info: {
+    singularName: 'auth-notification';
+    pluralName: 'auth-notifications';
+    displayName: 'Auth Notification';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    link: Attribute.Component<'elements.link'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::auth-notification.auth-notification',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::auth-notification.auth-notification',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::auth-notification.auth-notification',
+      'oneToMany',
+      'api::auth-notification.auth-notification'
     >;
     locale: Attribute.String;
   };
@@ -1868,6 +1931,11 @@ export interface ApiProductProduct extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    wishlist: Attribute.Relation<
+      'api::product.product',
+      'manyToOne',
+      'api::wishlist.wishlist'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -2351,6 +2419,46 @@ export interface ApiTermPageTermPage extends Schema.SingleType {
   };
 }
 
+export interface ApiWishlistWishlist extends Schema.CollectionType {
+  collectionName: 'wishlists';
+  info: {
+    singularName: 'wishlist';
+    pluralName: 'wishlists';
+    displayName: 'Wishlist';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::wishlist.wishlist',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    products: Attribute.Relation<
+      'api::wishlist.wishlist',
+      'oneToMany',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::wishlist.wishlist',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::wishlist.wishlist',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -2372,6 +2480,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::about-us-page.about-us-page': ApiAboutUsPageAboutUsPage;
+      'api::auth-notification.auth-notification': ApiAuthNotificationAuthNotification;
       'api::category.category': ApiCategoryCategory;
       'api::collection.collection': ApiCollectionCollection;
       'api::color.color': ApiColorColor;
@@ -2393,6 +2502,7 @@ declare module '@strapi/types' {
       'api::subscription.subscription': ApiSubscriptionSubscription;
       'api::success-page.success-page': ApiSuccessPageSuccessPage;
       'api::term-page.term-page': ApiTermPageTermPage;
+      'api::wishlist.wishlist': ApiWishlistWishlist;
     }
   }
 }
