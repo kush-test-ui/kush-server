@@ -106,8 +106,11 @@ export interface ComplexProfileForm extends Schema.Component {
   attributes: {
     general: Attribute.Component<'elements.input', true>;
     additional: Attribute.Component<'elements.input', true>;
+    contacts: Attribute.Component<'elements.input', true>;
+    generalTitle: Attribute.String;
+    additionalTitle: Attribute.String;
+    contactsTitle: Attribute.String;
     actions: Attribute.Component<'elements.button', true>;
-    avatar: Attribute.Media;
   };
 }
 

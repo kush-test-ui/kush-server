@@ -26,16 +26,6 @@
       },
       "component": "complex.profile-form"
     },
-    "seo": {
-      "type": "component",
-      "repeatable": false,
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "shared.seo"
-    },
     "navigation": {
       "type": "component",
       "repeatable": true,
@@ -46,13 +36,15 @@
       },
       "component": "elements.link"
     },
-    "title": {
+    "seo": {
+      "type": "component",
+      "repeatable": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "type": "string"
+      "component": "shared.seo"
     }
   }
 }

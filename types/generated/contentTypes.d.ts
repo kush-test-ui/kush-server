@@ -2051,19 +2051,13 @@ export interface ApiProfilePageProfilePage extends Schema.SingleType {
           localized: true;
         };
       }>;
-    seo: Attribute.Component<'shared.seo'> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     navigation: Attribute.Component<'elements.link', true> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
         };
       }>;
-    title: Attribute.String &
+    seo: Attribute.Component<'shared.seo'> &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
