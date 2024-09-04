@@ -870,12 +870,12 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'api::order.order'
     >;
     phoneNumber: Attribute.String;
-    avatar: Attribute.Media;
     wishlist: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToOne',
       'api::wishlist.wishlist'
     >;
+    date: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

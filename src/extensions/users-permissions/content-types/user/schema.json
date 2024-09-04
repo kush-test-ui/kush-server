@@ -89,18 +89,14 @@
     "phoneNumber": {
       "type": "string"
     },
-    "avatar": {
-      "allowedTypes": [
-        "images"
-      ],
-      "type": "media",
-      "multiple": false
-    },
     "wishlist": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::wishlist.wishlist",
       "mappedBy": "user"
+    },
+    "date": {
+      "type": "date"
     }
   }
 }
