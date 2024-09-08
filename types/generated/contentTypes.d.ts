@@ -875,6 +875,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'api::wishlist.wishlist'
     >;
     date: Attribute.Date;
+    cityID: Attribute.String;
+    warehouseID: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

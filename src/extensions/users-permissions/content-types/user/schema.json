@@ -94,6 +94,12 @@
     },
     "date": {
       "type": "date"
+    },
+    "cityID": {
+      "type": "string"
+    },
+    "warehouseID": {
+      "type": "string"
     }
   }
 }
