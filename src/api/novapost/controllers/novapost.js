@@ -45,7 +45,7 @@ module.exports = {
   async getWarehouses(ctx) {
     try {
       const { cityRef } = ctx.params;
-      const { page = '1', limit = '50' } = ctx.query;
+      const { page = '1', limit = '50', search = '' } = ctx.query;
       const apiKey = process.env.NOVA_POSHTA_API_KEY;
 
       const methodProperties = {
@@ -54,6 +54,10 @@ module.exports = {
         Page: page,
         Limit: limit,
       };
+
+      if (search) {
+        methodProperties.FindByString = search;
+      }
 
       const response = await fetch('https://api.novaposhta.ua/v2.0/json/', {
         method: 'POST',
