@@ -861,9 +861,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     firstName: Attribute.String;
     lastName: Attribute.String;
-    deliveryAddress: Attribute.String;
-    billingAddress: Attribute.String;
-    stripeCustomerId: Attribute.String;
+    city: Attribute.String;
+    warehouse: Attribute.String;
     orders: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToMany',

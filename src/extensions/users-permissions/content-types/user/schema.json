@@ -71,13 +71,10 @@
     "lastName": {
       "type": "string"
     },
-    "deliveryAddress": {
+    "city": {
       "type": "string"
     },
-    "billingAddress": {
-      "type": "string"
-    },
-    "stripeCustomerId": {
+    "warehouse": {
       "type": "string"
     },
     "orders": {
