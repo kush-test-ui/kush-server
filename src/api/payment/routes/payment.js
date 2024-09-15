@@ -9,5 +9,14 @@ module.exports = {
         middlewares: [],
       },
     },
+    {
+      method: 'POST',
+      path: '/payment/callback',
+      handler: 'payment.callback',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 };

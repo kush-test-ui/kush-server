@@ -1725,6 +1725,10 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     currency: Attribute.String;
     paymentIntentID: Attribute.String;
     amount: Attribute.BigInteger;
+    customer_firstName: Attribute.String;
+    customer_lastName: Attribute.String;
+    customer_email: Attribute.Email;
+    customer_phone: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

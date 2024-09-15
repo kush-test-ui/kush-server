@@ -32,6 +32,18 @@
     },
     "amount": {
       "type": "biginteger"
+    },
+    "customer_firstName": {
+      "type": "string"
+    },
+    "customer_lastName": {
+      "type": "string"
+    },
+    "customer_email": {
+      "type": "email"
+    },
+    "customer_phone": {
+      "type": "string"
     }
   }
 }
