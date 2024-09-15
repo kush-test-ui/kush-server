@@ -26,7 +26,7 @@ module.exports = {
       'sandbox_YKxKymXMrPDRj8m1pG9wkWdV8tY9YEnAHdg0K9Nk';
     const version = '3';
 
-    const order = await strapi.query('api::order.order').create({
+    await strapi.query('api::order.order').create({
       data: {
         amount,
         products,
@@ -37,6 +37,7 @@ module.exports = {
         customer_lastName: customer.lastName,
         customer_email: customer.email,
         customer_phone: customer.phone,
+        customer_delivery: customer.delivery,
         paymentIntentID: order_id,
       },
     });
@@ -68,7 +69,7 @@ module.exports = {
       .update(private_key + data + private_key)
       .digest('base64');
 
-    return ctx.send({ data, signature, order });
+    return ctx.send({ data, signature, server_url });
   },
 
   async callback(ctx) {

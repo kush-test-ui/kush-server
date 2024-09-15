@@ -44,6 +44,9 @@
     },
     "customer_phone": {
       "type": "string"
+    },
+    "customer_delivery": {
+      "type": "text"
     }
   }
 }
