@@ -76,7 +76,9 @@ module.exports = {
     if (ctx.request.method === 'POST') {
       const { data, signature } = ctx.request.body;
 
-      const private_key = process.env.LIQPAY_PRIVATE_KEY;
+      const private_key =
+        process.env.LIQPAY_PRIVATE_KEY ||
+        'sandbox_YKxKymXMrPDRj8m1pG9wkWdV8tY9YEnAHdg0K9Nk';
 
       const expectedSignature = crypto
         .createHash('sha1')
