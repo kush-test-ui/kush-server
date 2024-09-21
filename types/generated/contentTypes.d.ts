@@ -1722,14 +1722,15 @@ export interface ApiOrderOrder extends Schema.CollectionType {
       'plugin::users-permissions.user'
     >;
     status: Attribute.String;
-    currency: Attribute.String;
     paymentIntentID: Attribute.String;
     amount: Attribute.BigInteger;
     customer_firstName: Attribute.String;
     customer_lastName: Attribute.String;
     customer_email: Attribute.Email;
     customer_phone: Attribute.String;
-    customer_delivery: Attribute.Text;
+    customer_city: Attribute.String;
+    customer_warehouse: Attribute.String;
+    self_delivery: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

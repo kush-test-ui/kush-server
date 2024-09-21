@@ -24,9 +24,6 @@
     "status": {
       "type": "string"
     },
-    "currency": {
-      "type": "string"
-    },
     "paymentIntentID": {
       "type": "string"
     },
@@ -45,8 +42,15 @@
     "customer_phone": {
       "type": "string"
     },
-    "customer_delivery": {
-      "type": "text"
+    "customer_city": {
+      "type": "string"
+    },
+    "customer_warehouse": {
+      "type": "string"
+    },
+    "self_delivery": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

@@ -15,47 +15,27 @@ module.exports = {
       order_id,
       shop_name,
       rro_info,
-      products,
-      userId,
       customer,
     } = ctx.request.body;
 
     const public_key = process.env.LIQPAY_PUBLIC_KEY || 'sandbox_i2714471428';
+
     const private_key =
       process.env.LIQPAY_PRIVATE_KEY ||
       'sandbox_YKxKymXMrPDRj8m1pG9wkWdV8tY9YEnAHdg0K9Nk';
     const version = '3';
 
-    await strapi.query('api::order.order').create({
-      data: {
-        amount,
-        products,
-        currency,
-        user: userId,
-        status: 'pending',
-        customer_firstName: customer.firstName,
-        customer_lastName: customer.lastName,
-        customer_email: customer.email,
-        customer_phone: customer.phone,
-        customer_delivery: customer.delivery,
-        paymentIntentID: order_id,
-      },
-    });
-
-    const server_url = `${ctx.request.protocol}://${ctx.request.host}/api/payment/callback`;
-
     const data = Buffer.from(
       JSON.stringify({
-        version,
-        public_key,
-        action: 'pay',
         amount,
+        version,
         currency,
-        description,
         order_id,
-        shop_name,
         rro_info,
-        server_url,
+        shop_name,
+        public_key,
+        description,
+        action: 'pay',
         sender_first_name: customer.firstName,
         sender_last_name: customer.lastName,
         sender_email: customer.email,
@@ -69,12 +49,12 @@ module.exports = {
       .update(private_key + data + private_key)
       .digest('base64');
 
-    return ctx.send({ data, signature, server_url });
+    return ctx.send({ data, signature });
   },
 
   async callback(ctx) {
     if (ctx.request.method === 'POST') {
-      const { data, signature } = ctx.request.body;
+      const { data, signature, userId, products, customer } = ctx.request.body;
 
       const private_key =
         process.env.LIQPAY_PRIVATE_KEY ||
@@ -93,7 +73,7 @@ module.exports = {
         Buffer.from(data, 'base64').toString('utf-8')
       );
 
-      const { order_id, status } = decodedData;
+      const { order_id, status, amount } = decodedData;
 
       let orderStatus;
 
@@ -111,15 +91,40 @@ module.exports = {
           orderStatus = 'unknown';
       }
 
-      const updatedOrder = await strapi.query('api::order.order').update({
+      const existingOrder = await strapi.query('api::order.order').findOne({
         where: { paymentIntentID: order_id },
-        data: { status: orderStatus },
+      });
+
+      if (existingOrder) {
+        return ctx.send({
+          status: 200,
+          order: existingOrder,
+          message: 'Transaction complete',
+        });
+      }
+
+      const order = await strapi.query('api::order.order').create({
+        data: {
+          amount,
+          products,
+          user: userId,
+          status: orderStatus,
+          self_delivery: customer.self_delivery,
+          customer_firstName: customer.firstName,
+          customer_lastName: customer.lastName,
+          customer_email: customer.email,
+          customer_phone: customer.phone,
+          customer_city: customer.customer_city,
+          customer_warehouse: customer.customer_warehouse,
+          paymentIntentID: order_id,
+          publishedAt: new Date(),
+        },
       });
 
       return ctx.send({
         status: 200,
+        order: order,
         message: 'Transaction complete',
-        order: updatedOrder,
       });
     } else {
       return ctx.send({ status: 405, message: 'Method not allowed' });
