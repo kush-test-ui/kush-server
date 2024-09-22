@@ -17,15 +17,19 @@ module.exports = ({ env }) => ({
     config: {
       provider: 'strapi-provider-email-resend',
       providerOptions: {
-        apiKey: "re_PJQPr37h_AGk3XNdS82RFAv6DeEjgB5Fs",
+        apiKey: 're_YPNzKLx5_CcSAziheBWHeQLEBEKBupj4q',
       },
       settings: {
         defaultFrom: 'no-reply@kush-ecommerce.online',
         defaultReplyTo: 'no-reply@kush-ecommerce.online',
       },
-    }
+    },
   },
   'email-designer': {
     enabled: true,
-  }, 
+  },
 });
+
+// new re_YPNzKLx5_CcSAziheBWHeQLEBEKBupj4q
+
+// prod re_PJQPr37h_AGk3XNdS82RFAv6DeEjgB5Fs

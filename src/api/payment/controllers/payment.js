@@ -107,7 +107,9 @@ module.exports = {
         data: {
           amount,
           products,
-          user: userId,
+          user: {
+            connect: { id: userId },
+          },
           status: orderStatus,
           self_delivery: customer.self_delivery,
           customer_firstName: customer.firstName,
