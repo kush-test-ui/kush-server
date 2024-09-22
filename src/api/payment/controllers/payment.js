@@ -1,9 +1,5 @@
 'use strict';
 
-/**
- * A set of functions called "actions" for `payment`
- */
-
 const crypto = require('crypto');
 
 module.exports = {
@@ -23,12 +19,11 @@ module.exports = {
     const private_key =
       process.env.LIQPAY_PRIVATE_KEY ||
       'sandbox_YKxKymXMrPDRj8m1pG9wkWdV8tY9YEnAHdg0K9Nk';
-    const version = '3';
 
     const data = Buffer.from(
       JSON.stringify({
         amount,
-        version,
+        version: '3',
         currency,
         order_id,
         rro_info,
@@ -65,60 +60,49 @@ module.exports = {
         .update(private_key + data + private_key)
         .digest('base64');
 
-      if (signature !== expectedSignature) {
-        return ctx.send({ status: 400, message: 'Invalid signature' });
-      }
-
       const decodedData = JSON.parse(
         Buffer.from(data, 'base64').toString('utf-8')
       );
 
-      const { order_id, status, amount } = decodedData;
-
-      let orderStatus;
-
-      switch (status) {
-        case 'success':
-          orderStatus = 'completed';
-          break;
-        case 'failure':
-          orderStatus = 'failed';
-          break;
-        case 'sandbox':
-          orderStatus = 'sandbox';
-          break;
-        default:
-          orderStatus = 'unknown';
+      if (signature !== expectedSignature) {
+        return ctx.send({ status: 400, message: 'Invalid signature' });
       }
 
-      const existingOrder = await strapi.query('api::order.order').findOne({
-        where: { paymentIntentID: order_id },
-      });
+      const { order_id, status, amount } = decodedData;
 
-      if (existingOrder) {
+      const updatedProducts = products.map((product) => ({
+        ...product,
+        status,
+      }));
+
+      const existingCurrentOrder = await strapi
+        .query('api::order.order')
+        .findOne({
+          where: { paymentIntentID: order_id },
+        });
+
+      if (existingCurrentOrder) {
         return ctx.send({
           status: 200,
-          order: existingOrder,
+          order: existingCurrentOrder,
           message: 'Transaction complete',
         });
       }
 
       const order = await strapi.query('api::order.order').create({
         data: {
-          amount,
-          products,
           user: {
             connect: { id: userId },
           },
-          status: orderStatus,
-          self_delivery: customer.self_delivery,
+          amount,
+          paymentIntentID: order_id,
+          products: updatedProducts,
           customer_firstName: customer.firstName,
           customer_lastName: customer.lastName,
           customer_email: customer.email,
           customer_phone: customer.phone,
-          customer_city: customer.customer_city,
-          customer_warehouse: customer.customer_warehouse,
-          paymentIntentID: order_id,
+          customer_city: customer.city,
+          customer_warehouse: customer.warehouse,
           publishedAt: new Date(),
         },
       });
@@ -128,8 +112,6 @@ module.exports = {
         order: order,
         message: 'Transaction complete',
       });
-    } else {
-      return ctx.send({ status: 405, message: 'Method not allowed' });
     }
   },
 };
