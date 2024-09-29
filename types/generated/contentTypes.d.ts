@@ -1172,40 +1172,6 @@ export interface ApiCollectionCollection extends Schema.CollectionType {
   };
 }
 
-export interface ApiColorColor extends Schema.CollectionType {
-  collectionName: 'colors';
-  info: {
-    singularName: 'color';
-    pluralName: 'colors';
-    displayName: 'Color';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    colors: Attribute.Enumeration<
-      ['green', 'yellow', 'white', 'purple', 'black', 'grey']
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::color.color',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::color.color',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiContactUsPageContactUsPage extends Schema.SingleType {
   collectionName: 'contact_us_pages';
   info: {
@@ -1897,11 +1863,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'manyToMany',
       'api::collection.collection'
     >;
-    colors: Attribute.Relation<
-      'api::product.product',
-      'oneToMany',
-      'api::color.color'
-    >;
     materials: Attribute.Relation<
       'api::product.product',
       'oneToMany',
@@ -1912,12 +1873,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'oneToMany',
       'api::size.size'
     >;
-    color: Attribute.Enumeration<['White', 'Yellow', 'Blue', 'Green', 'Red']> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
     slug: Attribute.UID<'api::product.product', 'title'> & Attribute.Required;
     seo: Attribute.Component<'shared.seo'> &
       Attribute.SetPluginOptions<{
@@ -2484,7 +2439,6 @@ declare module '@strapi/types' {
       'api::auth-notification.auth-notification': ApiAuthNotificationAuthNotification;
       'api::category.category': ApiCategoryCategory;
       'api::collection.collection': ApiCollectionCollection;
-      'api::color.color': ApiColorColor;
       'api::contact-us-page.contact-us-page': ApiContactUsPageContactUsPage;
       'api::delivery.delivery': ApiDeliveryDelivery;
       'api::forgot-page.forgot-page': ApiForgotPageForgotPage;

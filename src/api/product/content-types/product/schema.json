@@ -123,11 +123,6 @@
       "target": "api::collection.collection",
       "inversedBy": "products"
     },
-    "colors": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::color.color"
-    },
     "materials": {
       "type": "relation",
       "relation": "oneToMany",
@@ -137,21 +132,6 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::size.size"
-    },
-    "color": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "White",
-        "Yellow",
-        "Blue",
-        "Green",
-        "Red"
-      ]
     },
     "slug": {
       "pluginOptions": {},
