@@ -16,21 +16,8 @@
       "type": "string",
       "pluginOptions": {}
     },
-    "materials": {
-      "type": "enumeration",
-      "enum": [
-        "gold",
-        "silver ",
-        "platinum",
-        "palladium",
-        "titanium",
-        "tungsten",
-        "stainless",
-        "copper",
-        "bronze",
-        "brass"
-      ],
-      "pluginOptions": {}
+    "value": {
+      "type": "string"
     }
   }
 }

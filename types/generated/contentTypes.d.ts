@@ -1671,20 +1671,7 @@ export interface ApiMaterialMaterial extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    materials: Attribute.Enumeration<
-      [
-        'gold',
-        'silver ',
-        'platinum',
-        'palladium',
-        'titanium',
-        'tungsten',
-        'stainless',
-        'copper',
-        'bronze',
-        'brass'
-      ]
-    >;
+    value: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
