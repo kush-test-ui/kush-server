@@ -4,7 +4,8 @@
   "info": {
     "singularName": "size",
     "pluralName": "sizes",
-    "displayName": "Size"
+    "displayName": "Size",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,7 +16,7 @@
       "type": "string"
     },
     "size": {
-      "type": "integer",
+      "type": "float",
       "min": 8,
       "max": 20
     }

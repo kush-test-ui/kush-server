@@ -2242,13 +2242,14 @@ export interface ApiSizeSize extends Schema.CollectionType {
     singularName: 'size';
     pluralName: 'sizes';
     displayName: 'Size';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String;
-    size: Attribute.Integer &
+    size: Attribute.Float &
       Attribute.SetMinMax<
         {
           min: 8;
