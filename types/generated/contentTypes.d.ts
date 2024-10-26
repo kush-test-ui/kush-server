@@ -1656,6 +1656,65 @@ export interface ApiMaterialMaterial extends Schema.CollectionType {
   };
 }
 
+export interface ApiOffertaPageOffertaPage extends Schema.SingleType {
+  collectionName: 'offerta_pages';
+  info: {
+    singularName: 'offerta-page';
+    pluralName: 'offerta-pages';
+    displayName: 'Offerta page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    content: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    seo: Attribute.Component<'shared.seo'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::offerta-page.offerta-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::offerta-page.offerta-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::offerta-page.offerta-page',
+      'oneToMany',
+      'api::offerta-page.offerta-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface ApiOrderOrder extends Schema.CollectionType {
   collectionName: 'orders';
   info: {
@@ -1840,12 +1899,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
         };
       }>;
     hintText: Attribute.String &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    priceText: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -2446,6 +2499,7 @@ declare module '@strapi/types' {
       'api::home.home': ApiHomeHome;
       'api::login-page.login-page': ApiLoginPageLoginPage;
       'api::material.material': ApiMaterialMaterial;
+      'api::offerta-page.offerta-page': ApiOffertaPageOffertaPage;
       'api::order.order': ApiOrderOrder;
       'api::policy-page.policy-page': ApiPolicyPagePolicyPage;
       'api::product.product': ApiProductProduct;

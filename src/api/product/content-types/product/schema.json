@@ -100,14 +100,6 @@
       },
       "type": "string"
     },
-    "priceText": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "string"
-    },
     "saleValue": {
       "pluginOptions": {
         "i18n": {
