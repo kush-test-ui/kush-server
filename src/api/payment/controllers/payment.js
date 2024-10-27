@@ -106,6 +106,7 @@ module.exports = {
 <b>Пошта:</b> ${customer.email}
 <b>Номер телефону: ${customer.phone}</b>
 <b>Продукція:</b> ${updatedProducts.map(({ name }) => name).join(', ')}
+<b>Cума оплати: </b> ${amount}грн.
 <b>Доставити:</b> ${
           customer.self
             ? 'Caмовивіз'
