@@ -1,5 +1,3 @@
-'use strict';
-
 const crypto = require('crypto');
 
 module.exports = {
@@ -14,11 +12,8 @@ module.exports = {
       customer,
     } = ctx.request.body;
 
-    const public_key = process.env.LIQPAY_PUBLIC_KEY || 'sandbox_i2714471428';
-
-    const private_key =
-      process.env.LIQPAY_PRIVATE_KEY ||
-      'sandbox_YKxKymXMrPDRj8m1pG9wkWdV8tY9YEnAHdg0K9Nk';
+    const public_key = process.env.LIQPAY_PUBLIC_KEY;
+    const private_key = process.env.LIQPAY_PRIVATE_KEY;
 
     const data = Buffer.from(
       JSON.stringify({
@@ -35,7 +30,6 @@ module.exports = {
         sender_last_name: customer.lastName,
         sender_email: customer.email,
         sender_phone: customer.phone,
-        sandbox: '1',
       })
     ).toString('base64');
 
@@ -51,9 +45,7 @@ module.exports = {
     if (ctx.request.method === 'POST') {
       const { data, signature, userId, products, customer } = ctx.request.body;
 
-      const private_key =
-        process.env.LIQPAY_PRIVATE_KEY ||
-        'sandbox_YKxKymXMrPDRj8m1pG9wkWdV8tY9YEnAHdg0K9Nk';
+      const private_key = process.env.LIQPAY_PRIVATE_KEY;
 
       const expectedSignature = crypto
         .createHash('sha1')
@@ -89,29 +81,59 @@ module.exports = {
         });
       }
 
-      const order = await strapi.query('api::order.order').create({
-        data: {
-          user: {
-            connect: { id: userId },
+      try {
+        const order = await strapi.query('api::order.order').create({
+          data: {
+            user: userId ? { connect: { id: userId } } : null,
+            amount,
+            status,
+            paymentIntentID: order_id,
+            products: updatedProducts,
+            customer_firstName: customer.firstName,
+            customer_lastName: customer.lastName,
+            customer_email: customer.email,
+            customer_phone: customer.phone,
+            customer_city: customer.city,
+            customer_warehouse: customer.warehouse,
+            publishedAt: new Date(),
+            self_delivery: customer.self,
           },
-          amount,
-          paymentIntentID: order_id,
-          products: updatedProducts,
-          customer_firstName: customer.firstName,
-          customer_lastName: customer.lastName,
-          customer_email: customer.email,
-          customer_phone: customer.phone,
-          customer_city: customer.city,
-          customer_warehouse: customer.warehouse,
-          publishedAt: new Date(),
-        },
-      });
+        });
 
-      return ctx.send({
-        status: 200,
-        order: order,
-        message: 'Transaction complete',
-      });
+        const payload = `
+<b>Замовлення №:</b> ${order_id}
+<b>Покупець:</b> ${customer.firstName} ${customer.lastName}
+<b>Пошта:</b> ${customer.email}
+<b>Номер телефону: ${customer.phone}</b>
+<b>Продукція:</b> ${updatedProducts.map(({ name }) => name).join(', ')}
+<b>Доставити:</b> ${
+          customer.self
+            ? 'Caмовивіз'
+            : `Місто: ${customer.city}, Відділення: ${customer.warehouse}`
+        }
+`;
+
+        await fetch(
+          `https://api.telegram.org/bot${process.env.TG_TOKEN}/sendMessage`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: `${process.env.TG_CHAT_ORDER_ID}`,
+              parse_mode: 'HTML',
+              text: payload,
+            }),
+          }
+        );
+
+        return ctx.send({
+          status: 200,
+          order: order,
+          message: 'Transaction complete',
+        });
+      } catch (error) {
+        return ctx.send({ status: 500, message: 'Internal Server Error' });
+      }
     }
   },
 };
