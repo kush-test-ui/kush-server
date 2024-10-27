@@ -109,7 +109,7 @@ module.exports = {
 <b>Доставити:</b> ${
           customer.self
             ? 'Caмовивіз'
-            : `Місто: ${customer.city}, Відділення: ${customer.warehouse}`
+            : `М. ${customer.customer_city}, ${customer.customer_warehouse}`
         }
 `;
 
