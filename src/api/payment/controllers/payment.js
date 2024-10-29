@@ -28,6 +28,8 @@ module.exports = {
         action: 'pay',
         sender_first_name: customer.firstName,
         sender_last_name: customer.lastName,
+        sender_city: customer.city,
+        sender_address: customer.warehouse,
         sender_email: customer.email,
         sender_phone: customer.phone,
       })
