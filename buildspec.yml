@@ -11,11 +11,11 @@ phases:
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t kush-e-commerce-back:$CODEBUILD_SOURCE_VERSION .
+      - docker build -t kush-e-commerce-back:$(git rev-parse HEAD) .
       - echo Tagging the Docker image...
-      - docker tag kush-e-commerce-back:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kush-e-commerce-back:$CODEBUILD_SOURCE_VERSION
+      - docker tag kush-e-commerce-back:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kush-e-commerce-back:$(git rev-parse HEAD)
   post_build:
     commands:
       - echo Pushing the Docker image to ECR...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kush-e-commerce-back:$CODEBUILD_SOURCE_VERSIONs
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kush-e-commerce-back:$(git rev-parse HEAD)
       - echo Build completed on `date`
