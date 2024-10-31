@@ -37,7 +37,7 @@ module.exports = {
         );
       }
 
-      const tokenExpiry = remember === 'on' ? '14d' : '1d';
+      const tokenExpiry = remember === 'on' ? '7d' : '1d';
 
       const jwt = {
         accessToken: strapi.plugins['users-permissions'].services.jwt.issue(
@@ -52,6 +52,11 @@ module.exports = {
             confirmed: user.confirmed,
             provider: user.provider,
             email: user.email,
+            date: user.date,
+            city: user.city,
+            warehouse: user.warehouse,
+            cityID: user.cityID,
+            warehouseID: user.warehouseID,
           },
           { expiresIn: tokenExpiry }
         ),
@@ -62,7 +67,6 @@ module.exports = {
         {
           jwt,
           id: user.id,
-          picture: user.avatar,
           username: user.username,
           message: locale === 'uk' ? 'З поверненям' : 'Welcome back',
           status: 200,
@@ -73,6 +77,7 @@ module.exports = {
       ctx.badRequest(err);
     }
   },
+
   async isUserExist(ctx) {
     const { email } = ctx.request.body;
     try {
@@ -96,8 +101,13 @@ module.exports = {
               confirmed: user.confirmed,
               provider: user.provider,
               email: user.email,
+              date: user.date,
+              city: user.city,
+              warehouse: user.warehouse,
+              cityID: user.cityID,
+              warehouseID: user.warehouseID,
             },
-            { expiresIn: '14d' }
+            { expiresIn: '7d' }
           ),
         };
 
@@ -105,7 +115,6 @@ module.exports = {
           {
             jwt,
             id: user.id,
-            picture: user?.avatar,
             username: user.username,
             exist: true,
             status: 200,
