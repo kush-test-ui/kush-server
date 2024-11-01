@@ -2,7 +2,7 @@
   {
     "containerName": "${container_name}", 
     "name": "${container_name}", 
-    "environment": [
+    "secrets": [
       {"name": "PUBLIC_URL", "valueFrom": "/backend/dev/PUBLIC_URL"},
       {"name": "CLOUDINARY_NAME", "valueFrom": "/backend/dev/CLOUDINARY_NAME"},
       {"name": "CLOUDINARY_KEY", "valueFrom": "/backend/dev/CLOUDINARY_KEY"},
