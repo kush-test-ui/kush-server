@@ -82,6 +82,7 @@ module.exports = ({ env }) => {
     },
   };
 
+  console.log("Connecting to Database Host:", env('DATABASE_HOST'));
   return {
     connection: {
       client,
