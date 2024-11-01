@@ -38,7 +38,7 @@ data "template_file" "template" {
   vars = {
     container_name = var.name
     role_arn = data.terraform_remote_state.ci_backend.outputs.role_arn
-    repo_arn = data.terraform_remote_state.ecr.outputs.ecr_repo_backend_arn
+    repo_arn = data.terraform_remote_state.ecr.outputs.ecr_repo_backend_repository_url
     image_tag = var.image_tag
     container_port = 1337
     host_port = 1337
