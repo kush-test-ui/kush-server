@@ -31,6 +31,8 @@ resource "aws_ecs_service" "ecs_service" {
 resource "aws_ecs_task_definition" "service" {
   family                = "service"
   container_definitions = data.template_file.template.rendered  
+  task_role_arn         = data.terraform_remote_state.ci_backend.outputs.role_arn
+  execution_role_arn    = data.terraform_remote_state.ci_backend.outputs.role_arn
 }
 
 data "template_file" "template" {
