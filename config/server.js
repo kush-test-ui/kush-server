@@ -4,7 +4,7 @@ module.exports = ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
-  url: env('PUBLIC_URL', 'https://dev.kush.jewelry/strapi'),
+  url: env('PUBLIC_URL', 'https://dev.kush.jewelry'),
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
