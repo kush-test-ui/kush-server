@@ -17,11 +17,11 @@ module.exports = ({ env }) => ({
     config: {
       provider: 'strapi-provider-email-resend',
       providerOptions: {
-        apiKey: 're_PJQPr37h_AGk3XNdS82RFAv6DeEjgB5Fs',
+        apiKey: env('RESEND_API_KEY')
       },
       settings: {
-        defaultFrom: 'no-reply@kush-ecommerce.online',
-        defaultReplyTo: 'no-reply@kush-ecommerce.online',
+        defaultFrom: env('RESEND_DOMAIN_NAME'),
+        defaultReplyTo:  env('RESEND_DOMAIN_NAME'),
       },
     },
   },
@@ -29,5 +29,3 @@ module.exports = ({ env }) => ({
     enabled: true,
   },
 });
-
-// new re_YPNzKLx5_CcSAziheBWHeQLEBEKBupj4q
