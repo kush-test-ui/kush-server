@@ -26,11 +26,8 @@ jobs:
           DATABASE_USERNAME: strapi_admin
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DATABASE_SSL: false
-          SMTP_PASSWORD: re_4JrtYSot_8PbZoLo2EUCsZA9uJErKkKH6
-          PUBLIC_URL: https://dev.kush-test.pp.ua/strapi
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          PUBLIC_URL: https://api.kush.jewelry
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
           CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
-          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
-          STRIPE_PUBLIC_KEY: ${{ secrets.STRIPE_PUBLIC_KEY }}
-          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
