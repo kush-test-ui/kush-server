@@ -4,9 +4,11 @@ RUN install -d -o node -g node -m 0755 /app
 RUN mkdir -p /app/dist /app/.cache
 WORKDIR /app
 COPY . .
+ARG NEXT_PUBLIC_URL
+ENV NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
 RUN yarn install
 RUN cd /app
 RUN yarn install
 EXPOSE 1337
-RUN yarn run build
+RUN NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL} yarn run build
 CMD ["yarn", "start"]
