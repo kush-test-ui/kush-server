@@ -27,7 +27,7 @@ jobs:
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DATABASE_SSL: false
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
+          PUBLIC_URL: https://api.kush.jewelry
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
           CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
