@@ -12,8 +12,8 @@ module.exports = {
       customer,
     } = ctx.request.body;
 
-    const public_key = process.env.LIQPAY_PUBLIC_KEY;
-    const private_key = process.env.LIQPAY_PRIVATE_KEY;
+    const public_key = 'i85549703498';
+    const private_key = 'CT9i3VSrVlUaDxuKlGZEj5HHRtC6JWHK2gg9SP2P';
 
     const data = Buffer.from(
       JSON.stringify({
@@ -47,7 +47,7 @@ module.exports = {
     if (ctx.request.method === 'POST') {
       const { data, signature, userId, products, customer } = ctx.request.body;
 
-      const private_key = process.env.LIQPAY_PRIVATE_KEY;
+      const private_key = 'CT9i3VSrVlUaDxuKlGZEj5HHRtC6JWHK2gg9SP2P';
 
       const expectedSignature = crypto
         .createHash('sha1')
