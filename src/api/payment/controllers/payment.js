@@ -106,15 +106,21 @@ module.exports = {
 <b>Замовлення №:</b> ${order_id}
 <b>Покупець:</b> ${customer.firstName} ${customer.lastName}
 <b>Пошта:</b> ${customer.email}
-<b>Номер телефону: ${customer.phone}</b>
-<b>Продукція:</b> ${updatedProducts.map(({ name }) => name).join(', ')}
-<b>Cума оплати: </b> ${amount}грн.
+<b>Номер телефону:</b> ${customer.phone}
+<b>Продукція:</b> ${updatedProducts
+          .map(
+            ({ name, size, material }) =>
+              `- ${name}${size ? `, Розмір: ${size}` : ''}${
+                material ? `, Матеріал: ${material}` : ''
+              }`
+          )
+          .join('\n')}
+<b>Cума оплати:</b> ${amount} грн.
 <b>Доставити:</b> ${
           customer.self
-            ? 'Caмовивіз'
+            ? 'Самовивіз'
             : `М. ${customer.customer_city}, ${customer.customer_warehouse}`
-        }
-`;
+        }`;
 
         await fetch(
           `https://api.telegram.org/bot${process.env.TG_TOKEN}/sendMessage`,
