@@ -1875,21 +1875,21 @@ export interface ApiProductProduct extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    price: Attribute.Decimal &
+    price: Attribute.Integer &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
-          localized: true;
+          localized: false;
         };
       }> &
       Attribute.SetMinMax<
         {
           min: 0;
-          max: 3000;
+          max: 5000;
         },
         number
       > &
-      Attribute.DefaultTo<1>;
+      Attribute.DefaultTo<10>;
     category: Attribute.Enumeration<
       ['bracelets', 'earrings', 'necklaces', 'rings']
     > &

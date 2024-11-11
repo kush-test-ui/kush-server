@@ -69,14 +69,14 @@
     "price": {
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       },
-      "type": "decimal",
-      "default": 1,
+      "type": "integer",
+      "default": 10,
       "required": true,
       "min": 0,
-      "max": 3000
+      "max": 5000
     },
     "category": {
       "pluginOptions": {

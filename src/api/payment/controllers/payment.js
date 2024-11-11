@@ -2,6 +2,9 @@ const crypto = require('crypto');
 
 module.exports = {
   async create(ctx) {
+    const public_key = 'i85549703498';
+    const private_key = 'CT9i3VSrVlUaDxuKlGZEj5HHRtC6JWHK2gg9SP2P';
+
     const {
       amount,
       currency,
@@ -11,9 +14,6 @@ module.exports = {
       rro_info,
       customer,
     } = ctx.request.body;
-
-    const public_key = 'i85549703498';
-    const private_key = 'CT9i3VSrVlUaDxuKlGZEj5HHRtC6JWHK2gg9SP2P';
 
     const data = Buffer.from(
       JSON.stringify({
@@ -45,9 +45,9 @@ module.exports = {
 
   async callback(ctx) {
     if (ctx.request.method === 'POST') {
-      const { data, signature, userId, products, customer } = ctx.request.body;
-
       const private_key = 'CT9i3VSrVlUaDxuKlGZEj5HHRtC6JWHK2gg9SP2P';
+
+      const { data, signature, userId, products, customer } = ctx.request.body;
 
       const expectedSignature = crypto
         .createHash('sha1')
@@ -104,22 +104,25 @@ module.exports = {
 
         const payload = `
 <b>Замовлення №:</b> ${order_id}
+
 <b>Покупець:</b> ${customer.firstName} ${customer.lastName}
+<b>Номер телефону:</b> +${customer.phone}
 <b>Пошта:</b> ${customer.email}
-<b>Номер телефону:</b> ${customer.phone}
-<b>Продукція:</b> ${updatedProducts
+
+<b>Товар:</b>${updatedProducts
           .map(
             ({ name, size, material }) =>
-              `- ${name}${size ? `, Розмір: ${size}` : ''}${
-                material ? `, Матеріал: ${material}` : ''
+              `${name}\n${size ? `<b>Розмір:</b> ${size}\n` : ''}${
+                material ? `<b>Матеріал:</b> ${material}` : ''
               }`
           )
-          .join('\n')}
+          .join('')}
 <b>Cума оплати:</b> ${amount} грн.
-<b>Доставити:</b> ${
+
+<b>Доставка:</b> ${
           customer.self
             ? 'Самовивіз'
-            : `М. ${customer.customer_city}, ${customer.customer_warehouse}`
+            : `\n<b>Місто:</b> ${customer.customer_city}\n${customer.customer_warehouse}`
         }`;
 
         await fetch(
