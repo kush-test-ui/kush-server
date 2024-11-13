@@ -42,6 +42,6 @@
         "hostPort": ${host_port}
       }
     ],
-    "memoryReservation": 256
+    "memoryReservation": 1024
   }
 ]
