@@ -1,5 +1,5 @@
 FROM public.ecr.aws/docker/library/node:20.9.0-alpine
-RUN apk add --no-cache build-base gcc autoconf automake libtool zlib-dev libpng-dev nasm make bash g++ libc6-compat libjpeg-turbo-dev
+RUN apk add --no-cache build-base gcc autoconf automake libtool zlib-dev libpng-dev nasm make bash g++ libc6-compat libjpeg-turbo-dev curl
 RUN install -d -o node -g node -m 0755 /app
 RUN mkdir -p /app/dist /app/.cache
 WORKDIR /app
@@ -11,4 +11,5 @@ RUN cd /app
 RUN yarn install
 EXPOSE 1337
 RUN PUBLIC_URL=${PUBLIC_URL} yarn run build
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f http://localhost:1337 || exit 1
 CMD ["yarn", "start"]
