@@ -2,9 +2,9 @@
 
 module.exports = {
   contactUs: async (ctx) => {
-    const { email, name, message, locale } = ctx.request.body;
+    const { email, name, message, phone, locale } = ctx.request.body;
 
-    const payload = `<b>Ім'я:</b> ${name}\n<b>Пошта:</b> ${email}\n<b>Повідомлення:</b> ${message}`;
+    const payload = `<b>Ім'я:</b> ${name}\n<b>Номер телефону:</b> ${phone}\n<b>Пошта:</b> ${email}\n<b>Повідомлення:</b> ${message}`;
 
     const response = await fetch(
       `https://api.telegram.org/bot${process.env.TG_TOKEN}/sendMessage`,
