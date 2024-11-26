@@ -104,7 +104,7 @@ module.exports = {
 
         const payload = `
 <b>Замовлення №:</b> ${order_id}
-
+<b>Cтатус: </b> ${status}
 <b>Покупець:</b> ${customer.firstName} ${customer.lastName}
 <b>Номер телефону:</b> +${customer.phone}
 <b>Пошта:</b> ${customer.email}

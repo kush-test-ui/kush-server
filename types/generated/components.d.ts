@@ -232,6 +232,7 @@ export interface LayoutsFooter extends Schema.Component {
     socialLinks: Attribute.Component<'elements.social-link', true>;
     primaryPhone: Attribute.String;
     secondaryPhone: Attribute.String;
+    tertiaryPhone: Attribute.String;
   };
 }
 

@@ -120,6 +120,14 @@
       },
       "type": "customField",
       "customField": "plugin::google-maps.location-picker"
+    },
+    "tertiaryPhone": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }

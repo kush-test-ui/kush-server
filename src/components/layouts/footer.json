@@ -43,6 +43,9 @@
     },
     "secondaryPhone": {
       "type": "string"
+    },
+    "tertiaryPhone": {
+      "type": "string"
     }
   }
 }
