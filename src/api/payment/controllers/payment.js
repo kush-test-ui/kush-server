@@ -64,11 +64,6 @@ module.exports = {
 
       const { order_id, status, amount } = decodedData;
 
-      const updatedProducts = products.map((product) => ({
-        ...product,
-        status,
-      }));
-
       const existingCurrentOrder = await strapi
         .query('api::order.order')
         .findOne({
@@ -83,68 +78,81 @@ module.exports = {
         });
       }
 
-      try {
-        const order = await strapi.query('api::order.order').create({
-          data: {
-            user: userId ? { connect: { id: userId } } : null,
-            amount,
-            status,
-            paymentIntentID: order_id,
-            products: updatedProducts,
-            customer_firstName: customer.firstName,
-            customer_lastName: customer.lastName,
-            customer_email: customer.email,
-            customer_phone: customer.phone,
-            customer_city: customer.city,
-            customer_warehouse: customer.warehouse,
-            publishedAt: new Date(),
-            self_delivery: customer.self,
-          },
-        });
+      if (status === 'success') {
+        const updatedProducts = products.map((product) => ({
+          ...product,
+          status,
+        }));
 
-        const payload = `
-<b>Замовлення №:</b> ${order_id}
-<b>Cтатус: </b> ${status}
-<b>Покупець:</b> ${customer.firstName} ${customer.lastName}
-<b>Номер телефону:</b> +${customer.phone}
-<b>Пошта:</b> ${customer.email}
+        try {
+          const order = await strapi.query('api::order.order').create({
+            data: {
+              user: userId ? { connect: { id: userId } } : null,
+              amount,
+              status,
+              paymentIntentID: order_id,
+              products: updatedProducts,
+              customer_firstName: customer.firstName,
+              customer_lastName: customer.lastName,
+              customer_email: customer.email,
+              customer_phone: customer.phone,
+              customer_city: customer.city,
+              customer_warehouse: customer.warehouse,
+              publishedAt: new Date(),
+              self_delivery: customer.self,
+            },
+          });
 
-<b>Товар:</b>${updatedProducts
-          .map(
-            ({ name, size, material }) =>
-              `${name}\n${size ? `<b>Розмір:</b> ${size}\n` : ''}${
-                material ? `<b>Матеріал:</b> ${material}` : ''
-              }`
-          )
-          .join('')}
-<b>Cума оплати:</b> ${amount} грн.
+          const payload = `
+  <b>Замовлення №:</b> ${order_id}
+  <b>Cтатус: </b> ${status}
+  <b>Покупець:</b> ${customer.firstName} ${customer.lastName}
+  <b>Номер телефону:</b> +${customer.phone}
+  <b>Пошта:</b> ${customer.email}
+  
+  <b>Товар:</b>${updatedProducts
+    .map(
+      ({ name, size, material }) =>
+        `${name}\n${size ? `<b>Розмір:</b> ${size}\n` : ''}${
+          material ? `<b>Матеріал:</b> ${material}` : ''
+        }`
+    )
+    .join('')}
+  <b>Cума оплати:</b> ${amount} грн.
+  
+  <b>Доставка:</b> ${
+    customer.self
+      ? 'Самовивіз'
+      : `\n<b>Місто:</b> ${customer.customer_city}\n${customer.customer_warehouse}`
+  }`;
 
-<b>Доставка:</b> ${
-          customer.self
-            ? 'Самовивіз'
-            : `\n<b>Місто:</b> ${customer.customer_city}\n${customer.customer_warehouse}`
-        }`;
+          await fetch(
+            `https://api.telegram.org/bot${process.env.TG_TOKEN}/sendMessage`,
+            {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                chat_id: `${process.env.TG_CHAT_ORDER_ID}`,
+                parse_mode: 'HTML',
+                text: payload,
+              }),
+            }
+          );
 
-        await fetch(
-          `https://api.telegram.org/bot${process.env.TG_TOKEN}/sendMessage`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: `${process.env.TG_CHAT_ORDER_ID}`,
-              parse_mode: 'HTML',
-              text: payload,
-            }),
-          }
-        );
-
+          return ctx.send({
+            status: 200,
+            order: order,
+            message: 'Transaction complete',
+          });
+        } catch (error) {
+          return ctx.send({ status: 500, message: 'Internal Server Error' });
+        }
+      } else {
         return ctx.send({
-          status: 200,
-          order: order,
-          message: 'Transaction complete',
+          status: 204,
+          order: null,
+          message: status,
         });
-      } catch (error) {
-        return ctx.send({ status: 500, message: 'Internal Server Error' });
       }
     }
   },
