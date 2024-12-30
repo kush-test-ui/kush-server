@@ -16,22 +16,22 @@ const hash = (data) => {
 
 module.exports = {
   async sendPageView(ctx) {
-    const { session } = ctx.request.body;
+    const { data } = ctx.request.body;
 
     const pixelId = 351610264681498;
     const accessToken =
       'EAAGQHHtRco4BO3s1EEeu1cbuVfuOmSVJee4smWOf0jdm0MD9m68ZCvCvNbgTVcyIHTOstIz1inE24ec2ykVjga3bESw88BZCT6umUvoZABuXUtobg2lOrZBNkqTlp2DmSU9PXsakwshEA3NZAZCJdZB6egeujj4q9YfcONZALhKxGzF9CYsy8umZCZALdmHNY3y8MSDgZDZD';
 
     const hashedUserData = {
-      fn: session?.firstName ? [hash(session.firstName)] : undefined,
-      ln: session?.lastName ? [hash(session.lastName)] : undefined,
-      ph: session?.phoneNumber ? [hash(session.phoneNumber)] : undefined,
-      em: session?.email ? [hash(session.email)] : undefined,
-      ct: session?.city ? [hash(session.city)] : undefined,
-      country: [hash('ukraine')],
-      client_ip_address: ctx.request.ip,
-      client_user_agent: ctx.request.headers['user-agent'],
-      external_id: `session_${Math.random().toString(36).slice(2, 9)}`,
+      em: data?.email ? [hash(data.email)] : undefined,
+      ph: data?.phoneNumber ? [hash(data.phoneNumber)] : undefined,
+      fn: data?.firstName ? [hash(data.firstName)] : undefined,
+      ln: data?.lastName ? [hash(data.lastName)] : undefined,
+      country: [hash('ua')],
+      fbp: data?.fbp,
+      external_id: data?.id,
+      client_user_agent: data?.userAgent,
+      client_ip_address: ctx.request.ip || '0.0.0.0',
     };
 
     try {
