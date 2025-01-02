@@ -3,7 +3,7 @@ module.exports = {
     {
       method: 'POST',
       path: '/conversion',
-      handler: 'conversion.sendPageView',
+      handler: 'conversion.sendMetaEvent',
       config: {
         policies: [],
         middlewares: [],

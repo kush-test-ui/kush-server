@@ -15,23 +15,34 @@ const hash = (data) => {
 };
 
 module.exports = {
-  async sendPageView(ctx) {
-    const { data } = ctx.request.body;
+  async sendMetaEvent(ctx) {
+    const { event_name, event_time, user_data, custom_data, action_source } =
+      ctx.request.body;
 
-    const pixelId = 351610264681498;
+    const pixelId = process.env.FACEBOOK_PIXEL_ID || '351610264681498';
     const accessToken =
+      process.env.FACEBOOK_ACCESS_TOKEN ||
       'EAAGQHHtRco4BO3s1EEeu1cbuVfuOmSVJee4smWOf0jdm0MD9m68ZCvCvNbgTVcyIHTOstIz1inE24ec2ykVjga3bESw88BZCT6umUvoZABuXUtobg2lOrZBNkqTlp2DmSU9PXsakwshEA3NZAZCJdZB6egeujj4q9YfcONZALhKxGzF9CYsy8umZCZALdmHNY3y8MSDgZDZD';
 
+    // Hash sensitive user data
     const hashedUserData = {
-      em: data?.email ? [hash(data.email)] : undefined,
-      ph: data?.phoneNumber ? [hash(data.phoneNumber)] : undefined,
-      fn: data?.firstName ? [hash(data.firstName)] : undefined,
-      ln: data?.lastName ? [hash(data.lastName)] : undefined,
-      country: [hash('ua')],
-      fbp: data?.fbp,
-      external_id: data?.id,
-      client_user_agent: data?.userAgent,
+      em: user_data?.email ? [hash(user_data.email)] : null,
+      ph: user_data?.phoneNumber ? [hash(user_data.phoneNumber)] : null,
+      fn: user_data?.firstName ? [hash(user_data.firstName)] : null,
+      ln: user_data?.lastName ? [hash(user_data.lastName)] : null,
+      country: user_data?.country ? [hash('ua')] : null,
+      fbp: user_data?.fbp,
+      external_id: user_data?.id,
+      client_user_agent: ctx.request.headers['user-agent'] || null,
       client_ip_address: ctx.request.ip || '0.0.0.0',
+    };
+
+    const payload = {
+      event_name,
+      event_time,
+      custom_data,
+      action_source,
+      user_data: hashedUserData,
     };
 
     try {
@@ -42,33 +53,24 @@ module.exports = {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            data: [
-              {
-                event_name: 'PageView',
-                event_time: Math.floor(Date.now() / 1000),
-                user_data: hashedUserData,
-                action_source: 'website',
-              },
-            ],
-          }),
+          body: JSON.stringify({ data: [payload] }),
         }
       );
 
       if (!response.ok) {
         const errorResponse = await response.json();
-        console.error('Error sending InitiateCheckout event:', errorResponse);
+        console.error(`Error sending ${event_name} event:`, errorResponse);
         return ctx.badRequest('Failed to send event', errorResponse);
       }
 
       const responseData = await response.json();
 
       return ctx.send({
-        message: 'Event sent successfully',
+        message: `${event_name} event sent successfully`,
         response: responseData,
       });
     } catch (error) {
-      console.error('Error sending InitiateCheckout event:', error.message);
+      console.error(`Error sending ${event_name} event:`, error.message);
       return ctx.badRequest('Failed to send event');
     }
   },
