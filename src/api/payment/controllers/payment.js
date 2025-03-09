@@ -103,28 +103,25 @@ module.exports = {
             },
           });
 
-          const payload = `
-  <b>Замовлення №:</b> ${order_id}
-  <b>Cтатус: </b> ${status}
-  <b>Покупець:</b> ${customer.firstName} ${customer.lastName}
-  <b>Номер телефону:</b> +${customer.phone}
-  <b>Пошта:</b> ${customer.email}
+const payload = `
+<b>Замовлення №:</b> ${order_id}
+<b>Cтатус: </b> ${status}
+<b>Покупець:</b> ${customer.firstName} ${customer.lastName}
+<b>Номер телефону:</b> +${customer.phone}
+<b>Пошта:</b> ${customer.email}
   
-  <b>Товар:</b>${updatedProducts
-    .map(
-      ({ name, size, material }) =>
-        `${name}\n${size ? `<b>Розмір:</b> ${size}\n` : ''}${
-          material ? `<b>Матеріал:</b> ${material}` : ''
-        }`
-    )
-    .join('')}
-  <b>Cума оплати:</b> ${amount} грн.
+<b>Товар:</b>${updatedProducts
+  .map(({ name, size, material }) =>
+      `${name}\n${size ? `<b>Розмір:</b> ${size}\n` : ''}${
+        material ? `<b>Матеріал:</b> ${material}` : ''
+      }`).join('')}
+<b>Cума оплати:</b> ${amount} грн.
   
-  <b>Доставка:</b> ${
-    customer.self
-      ? 'Самовивіз'
-      : `\n<b>Місто:</b> ${customer.customer_city}\n${customer.customer_warehouse}`
-  }`;
+<b>Доставка:</b> ${
+  customer.self
+  ? 'Самовивіз'
+  : `\n<b>Місто:</b> ${customer.customer_city}\n${customer.customer_warehouse}`
+}`;
 
           await fetch(
             `https://api.telegram.org/bot${process.env.TG_TOKEN}/sendMessage`,
