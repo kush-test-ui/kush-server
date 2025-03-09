@@ -1727,8 +1727,8 @@
 
 "@strapi/admin@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/admin/-/admin-4.24.3.tgz#7201b2fbe41bd65d63974351cb1a3f034098c7ff"
-  integrity sha1-cgGy++Qb1l1jl0NRyxo/A0CYx/8=
+  resolved "https://registry.yarnpkg.com/@strapi/admin/-/admin-4.24.3.tgz#7201b2fbe41bd65d63974351cb1a3f034098c7ff"
+  integrity sha512-QpOSsDOG9cu7NpNu9rJBHEqu2n5zZh0/h+3SOA5JzmfHCoUMFvwszEgIOOsdvZy3ilLzG7dXc5jquN/Je0ByUA==
   dependencies:
     "@casl/ability" "6.5.0"
     "@pmmmwh/react-refresh-webpack-plugin" "0.5.11"
@@ -1832,8 +1832,8 @@
 
 "@strapi/content-releases@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/content-releases/-/content-releases-4.24.3.tgz#2b79b987ee7abd4b7c9ca1fbfb4bfb7eaea91b1e"
-  integrity sha1-K3m5h+56vUt8nKH7+0v7fq6pGx4=
+  resolved "https://registry.yarnpkg.com/@strapi/content-releases/-/content-releases-4.24.3.tgz#2b79b987ee7abd4b7c9ca1fbfb4bfb7eaea91b1e"
+  integrity sha512-BPIn9cFM0ljkAmGodRysDqpEqDUxVMk5WwX5bqNY85fuzzGQORBV7hyF8+NPwFKYoOwuUDqfHj3H7AtwKoVMiQ==
   dependencies:
     "@reduxjs/toolkit" "1.9.7"
     "@strapi/design-system" "1.18.0"
@@ -1853,8 +1853,8 @@
 
 "@strapi/data-transfer@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/data-transfer/-/data-transfer-4.24.3.tgz#e89e7c29a0b1ebb9a8ad323c672bc00310b55b98"
-  integrity sha1-6J58KaCx67morTI8ZyvAAxC1W5g=
+  resolved "https://registry.yarnpkg.com/@strapi/data-transfer/-/data-transfer-4.24.3.tgz#e89e7c29a0b1ebb9a8ad323c672bc00310b55b98"
+  integrity sha512-Ut0Li4cvaseEDmTNL+HeJMfcQxl2V+Tzyal4GR/kmAuP0Rkj/tQh9/Ld2c4bax5DLwkceJRTAL4Yq9OVBfv8LQ==
   dependencies:
     "@strapi/logger" "4.24.3"
     "@strapi/strapi" "4.24.3"
@@ -1877,8 +1877,8 @@
 
 "@strapi/database@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/database/-/database-4.24.3.tgz#c70954587e08bf95e71bade82a9c5913c7988475"
-  integrity sha1-xwlUWH4Iv5XnG63oKpxZE8eYhHU=
+  resolved "https://registry.yarnpkg.com/@strapi/database/-/database-4.24.3.tgz#c70954587e08bf95e71bade82a9c5913c7988475"
+  integrity sha512-II+ww3eyarmiGJ6i8/csQMvHzzeGgzd2O7kzP24Sns0d2Uf15w5l7ITfTjuaBJkIoTCpPu+TugiD/qyDxJDyFw==
   dependencies:
     "@strapi/utils" "4.24.3"
     date-fns "2.30.0"
@@ -1891,8 +1891,8 @@
 
 "@strapi/design-system@1.18.0":
   version "1.18.0"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/design-system/-/design-system-1.18.0.tgz#7673c2157e9d28edee118c981fd4fc8460fb723a"
-  integrity sha1-dnPCFX6dKO3uEYyYH9T8hGD7cjo=
+  resolved "https://registry.yarnpkg.com/@strapi/design-system/-/design-system-1.18.0.tgz#7673c2157e9d28edee118c981fd4fc8460fb723a"
+  integrity sha512-bQ//p4deEfu3z2rQOrT1QUPPugXsoVUusSuwdffZ7/fJAxOShZ8nOUmpWETq8bZECPoDn278cirYAXfcTftHLA==
   dependencies:
     "@codemirror/lang-json" "^6.0.1"
     "@floating-ui/react-dom" "^2.0.8"
@@ -1929,8 +1929,8 @@
 
 "@strapi/generate-new@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/generate-new/-/generate-new-4.24.3.tgz#921523750860a8c63651b35796e1a6dd306a084a"
-  integrity sha1-khUjdQhgqMY2UbNXluGm3TBqCEo=
+  resolved "https://registry.yarnpkg.com/@strapi/generate-new/-/generate-new-4.24.3.tgz#921523750860a8c63651b35796e1a6dd306a084a"
+  integrity sha512-BmSgkCj5oqSwnUg/1tWaE3saLg88kmbkziR8IItxPJjCFQNt4/t0W6i/TvlQPn9zG8fGk1qdR6TwoMeIo+JQgA==
   dependencies:
     "@sentry/node" "6.19.7"
     chalk "^4.1.2"
@@ -1946,8 +1946,8 @@
 
 "@strapi/generators@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/generators/-/generators-4.24.3.tgz#aff11f0c325d2b97d02e08a622ca941be4bf294c"
-  integrity sha1-r/EfDDJdK5fQLgimIsqUG+S/KUw=
+  resolved "https://registry.yarnpkg.com/@strapi/generators/-/generators-4.24.3.tgz#aff11f0c325d2b97d02e08a622ca941be4bf294c"
+  integrity sha512-7lZKOR3iV3SYwQehnKGSzCB4/sXXCFXEqsGGPvW/o1hbotdT5TJoKPjcSHGXBmhkMt6xH5GAZTcB7Ro42b9Ldw==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     "@strapi/typescript-utils" "4.24.3"
@@ -1961,8 +1961,8 @@
 
 "@strapi/helper-plugin@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/helper-plugin/-/helper-plugin-4.24.3.tgz#85dff21007642f7874e1c1e5e339d190a8e47dad"
-  integrity sha1-hd/yEAdkL3h04cHl4znRkKjkfa0=
+  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.24.3.tgz#85dff21007642f7874e1c1e5e339d190a8e47dad"
+  integrity sha512-5y/ro2n15IJrraDS0TLZQMS3ApcNLU2C16nOtIefSQ5gxr2kIYe5X1tn0eTXi9mnR7BEXZ49hHTC1O/k7s7ZXQ==
   dependencies:
     axios "1.6.0"
     date-fns "2.30.0"
@@ -1993,8 +1993,8 @@
 
 "@strapi/icons@1.18.0":
   version "1.18.0"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/icons/-/icons-1.18.0.tgz#ef8e36155ad4dfce53e83b780ba5c64856d1e9a2"
-  integrity sha1-7442FVrU385T6Dt4C6XGSFbR6aI=
+  resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-1.18.0.tgz#ef8e36155ad4dfce53e83b780ba5c64856d1e9a2"
+  integrity sha512-XeOjGqwDX7HkSfWNnUOx8WCT3qGzPixZrKxNUPCPmIzcLmhL9/Ni4wa1uoqwiZgzq/XzoiXpNEPl1lB5Tiljjg==
 
 "@strapi/icons@^1.6.3":
   version "1.19.0"
@@ -2003,8 +2003,8 @@
 
 "@strapi/logger@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/logger/-/logger-4.24.3.tgz#3c1ddcdc8183494dec67ac405eea1aaa5d5416fc"
-  integrity sha1-PB3c3IGDSU3sZ6xAXuoaql1UFvw=
+  resolved "https://registry.yarnpkg.com/@strapi/logger/-/logger-4.24.3.tgz#3c1ddcdc8183494dec67ac405eea1aaa5d5416fc"
+  integrity sha512-GTS8WJK53oFiD+qR9sEDv4qhSjz0QaS6kZaF5iGEJso62zawwHKbouw4ffRwKwDMuDLJVF0Bar/+A66nXadSVQ==
   dependencies:
     lodash "4.17.21"
     winston "3.10.0"
@@ -2038,8 +2038,8 @@
 
 "@strapi/permissions@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/permissions/-/permissions-4.24.3.tgz#3ec0dd10c7addf07efeee7915c021a414a5ab25c"
-  integrity sha1-PsDdEMet3wfv7ueRXAIaQUpaslw=
+  resolved "https://registry.yarnpkg.com/@strapi/permissions/-/permissions-4.24.3.tgz#3ec0dd10c7addf07efeee7915c021a414a5ab25c"
+  integrity sha512-8oqm+TGzN+/mZx+YeM660dhxVNmZJWdm5EDwy5o4Kiqdgt4IqTvr4CYq2rscsFtZE9lzx3X81jkYKPPARpOSQA==
   dependencies:
     "@casl/ability" "6.5.0"
     "@strapi/utils" "4.24.3"
@@ -2049,8 +2049,8 @@
 
 "@strapi/plugin-cloud@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/plugin-cloud/-/plugin-cloud-4.24.3.tgz#022b9281d92668d50ac73d14421ee4e5e02c4cc9"
-  integrity sha1-AiuSgdkmaNUKxz0UQh7k5eAsTMk=
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-cloud/-/plugin-cloud-4.24.3.tgz#022b9281d92668d50ac73d14421ee4e5e02c4cc9"
+  integrity sha512-ndxexnq1KhjZrJ3L10eqTRzRecQfyo3RkeqfsDFG/c9fBrq5H/QRKiE/pIdQdbJ39uGoi22O+yQnHfLTdO5OFQ==
   dependencies:
     "@strapi/design-system" "1.18.0"
     "@strapi/helper-plugin" "4.24.3"
@@ -2059,8 +2059,8 @@
 
 "@strapi/plugin-content-manager@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/plugin-content-manager/-/plugin-content-manager-4.24.3.tgz#e20e0e7d4e44a2e03e363f1add0824e8b6886531"
-  integrity sha1-4g4OfU5EouA+Nj8a3Qgk6LaIZTE=
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-content-manager/-/plugin-content-manager-4.24.3.tgz#e20e0e7d4e44a2e03e363f1add0824e8b6886531"
+  integrity sha512-2Pz76eT12UYUb8qhbXfs+L9Smm2gAll1f/y564C/ItozO+js9a7Yb0Uvvb/TFQXrGdxdWMvufnsRTw6IOiMJ7w==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     "@strapi/types" "4.24.3"
@@ -2072,8 +2072,8 @@
 
 "@strapi/plugin-content-type-builder@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/plugin-content-type-builder/-/plugin-content-type-builder-4.24.3.tgz#69736b3da60e5e8bcca807aff681c66254670536"
-  integrity sha1-aXNrPaYOXovMqAev9oHGYlRnBTY=
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-content-type-builder/-/plugin-content-type-builder-4.24.3.tgz#69736b3da60e5e8bcca807aff681c66254670536"
+  integrity sha512-sKVklTVi2t1wlGoquKoKzaIbvQWVVnYVlBuZAnu6XZcIaUeYDemMVVq0JXL9PKmxBZxIM0XhcNGQkVGYM4dZ2w==
   dependencies:
     "@reduxjs/toolkit" "1.9.7"
     "@sindresorhus/slugify" "1.1.0"
@@ -2096,8 +2096,8 @@
 
 "@strapi/plugin-email@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/plugin-email/-/plugin-email-4.24.3.tgz#7e22f738741fbc60b4b33cba753e4260e72034bf"
-  integrity sha1-fiL3OHQfvGC0szy6dT5CYOcgNL8=
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-email/-/plugin-email-4.24.3.tgz#7e22f738741fbc60b4b33cba753e4260e72034bf"
+  integrity sha512-kWQFl86fNTDbMt8J45r4LRhWgfZaIU/j5r4nOAU74uqqVRTK5D28izDwoyQ4Jh9pwIFToovnQxo60f+GhCVzBw==
   dependencies:
     "@strapi/design-system" "1.18.0"
     "@strapi/helper-plugin" "4.24.3"
@@ -2112,8 +2112,8 @@
 
 "@strapi/plugin-i18n@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/plugin-i18n/-/plugin-i18n-4.24.3.tgz#e7ec14c18e23237ca90f1a0ca3e1c2bc9460b872"
-  integrity sha1-5+wUwY4jI3ypDxoMo+HCvJRguHI=
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-i18n/-/plugin-i18n-4.24.3.tgz#e7ec14c18e23237ca90f1a0ca3e1c2bc9460b872"
+  integrity sha512-fDG1oetElyeVtPJwrYkaerdbl3wXfPs1OhFrHDgcJ1zl0cQn+lGJznPchFbfnG51VDMamJ9aQzzG2UYCAGMy8A==
   dependencies:
     "@reduxjs/toolkit" "1.9.7"
     "@strapi/design-system" "1.18.0"
@@ -2144,8 +2144,8 @@
 
 "@strapi/plugin-upload@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/plugin-upload/-/plugin-upload-4.24.3.tgz#98832b5b21fa1a7dfa01b9c37a59d8d889a0b42f"
-  integrity sha1-mIMrWyH6Gn36AbnDelnY2ImgtC8=
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-upload/-/plugin-upload-4.24.3.tgz#98832b5b21fa1a7dfa01b9c37a59d8d889a0b42f"
+  integrity sha512-x+IJK6gikcUJK0yp46WIAOTtdUDdYPboeE3HDfsIDJTLEnpPUpjH7HVgRYgOED8176CgTbNMo2lFb/2BIjKiAA==
   dependencies:
     "@strapi/design-system" "1.18.0"
     "@strapi/helper-plugin" "4.24.3"
@@ -2176,8 +2176,8 @@
 
 "@strapi/plugin-users-permissions@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/plugin-users-permissions/-/plugin-users-permissions-4.24.3.tgz#5a21624c772bc9d47a5413d3736f62f1ee934419"
-  integrity sha1-WiFiTHcrydR6VBPTc29i8e6TRBk=
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-4.24.3.tgz#5a21624c772bc9d47a5413d3736f62f1ee934419"
+  integrity sha512-V8SWhKCR1B2s82w6IuXE3p1bESzr3fNRWAKu6FmWLK7d426xCYT12deoIQsdlnf+uBx9S5Yq5GuzAR2vbq1vDg==
   dependencies:
     "@strapi/design-system" "1.18.0"
     "@strapi/helper-plugin" "4.24.3"
@@ -2202,8 +2202,8 @@
 
 "@strapi/provider-audit-logs-local@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/provider-audit-logs-local/-/provider-audit-logs-local-4.24.3.tgz#3ca4490ed389817bdffae75957a5c90e33f64b2f"
-  integrity sha1-PKRJDtOJgXvf+udZV6XJDjP2Sy8=
+  resolved "https://registry.yarnpkg.com/@strapi/provider-audit-logs-local/-/provider-audit-logs-local-4.24.3.tgz#3ca4490ed389817bdffae75957a5c90e33f64b2f"
+  integrity sha512-4UvpmGtQ+JuvvuC1VmGfQAXF3keuPwGa8tE2JHf9bvL+y6oioKi/Q2B08Kf/pTC0tr+P2nR8vZyEdHgN9Cim7Q==
 
 "@strapi/provider-email-nodemailer@^4.22.1":
   version "4.25.8"
@@ -2215,8 +2215,8 @@
 
 "@strapi/provider-email-sendmail@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/provider-email-sendmail/-/provider-email-sendmail-4.24.3.tgz#0ec0ef756b71ca002011ec4dd05994172108c4ef"
-  integrity sha1-DsDvdWtxygAgEexN0FmUFyEIxO8=
+  resolved "https://registry.yarnpkg.com/@strapi/provider-email-sendmail/-/provider-email-sendmail-4.24.3.tgz#0ec0ef756b71ca002011ec4dd05994172108c4ef"
+  integrity sha512-kRfFjK1L+btuAPRH3CDa+S4JF8l0l4KEWWDWf1zuy7ZHS2wtCr8BrAeUbuJ653ZlH5AKn3rGKLIFYodbh0c9ug==
   dependencies:
     "@strapi/utils" "4.24.3"
     sendmail "^1.6.1"
@@ -2232,16 +2232,16 @@
 
 "@strapi/provider-upload-local@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/provider-upload-local/-/provider-upload-local-4.24.3.tgz#7f90d035d3d9a16f7747923b28f56d8460af34c7"
-  integrity sha1-f5DQNdPZoW93R5I7KPVthGCvNMc=
+  resolved "https://registry.yarnpkg.com/@strapi/provider-upload-local/-/provider-upload-local-4.24.3.tgz#7f90d035d3d9a16f7747923b28f56d8460af34c7"
+  integrity sha512-c2KWvPKdzpfjaTOa6WOVIrQSvYGD5y+xlJjtPS2OMPswfX/x1FgFsT09kjEXWDtFTGP7UHgyYCX8VLreV3sG8g==
   dependencies:
     "@strapi/utils" "4.24.3"
     fs-extra "10.0.0"
 
 "@strapi/strapi@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/strapi/-/strapi-4.24.3.tgz#c66c6167c6e0d659ec4e8d5fdd673d4d6b520762"
-  integrity sha1-xmxhZ8bg1lnsTo1f3Wc9TWtSB2I=
+  resolved "https://registry.yarnpkg.com/@strapi/strapi/-/strapi-4.24.3.tgz#c66c6167c6e0d659ec4e8d5fdd673d4d6b520762"
+  integrity sha512-JhwybCQJW2Ps6i0g6W73vTCSXIYYGI3E34ukc7nGEp0PLxtXg6wqWKzrklBFj5sB0leA5KlV7BJFvWldmsARXw==
   dependencies:
     "@koa/cors" "5.0.0"
     "@koa/router" "10.1.1"
@@ -2311,8 +2311,8 @@
 
 "@strapi/types@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/types/-/types-4.24.3.tgz#701512272c2da8d9aacd88ba920e736ecce013e8"
-  integrity sha1-cBUSJywtqNmqzYi6kg5zbszgE+g=
+  resolved "https://registry.yarnpkg.com/@strapi/types/-/types-4.24.3.tgz#701512272c2da8d9aacd88ba920e736ecce013e8"
+  integrity sha512-whEr9DcmMQdPRud4QQVcKPWrLVZ/YgL12CYzFt4SJgw462x6jGYtKcXif2Tva5CPmoaCsnHQX5Oa1KEAdUmKGA==
   dependencies:
     "@casl/ability" "6.5.0"
     "@koa/cors" "5.0.0"
@@ -2329,8 +2329,8 @@
 
 "@strapi/typescript-utils@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/typescript-utils/-/typescript-utils-4.24.3.tgz#bfc831a166868e804f4ac238e0c22fdf6877ba55"
-  integrity sha1-v8gxoWaGjoBPSsI44MIv32h3ulU=
+  resolved "https://registry.yarnpkg.com/@strapi/typescript-utils/-/typescript-utils-4.24.3.tgz#bfc831a166868e804f4ac238e0c22fdf6877ba55"
+  integrity sha512-eyN7FY21Tii2Eby82BDANa8U7ZDmX2QtWbzI8LziRKFaV5GLrjmnJXO3rp6FLjT0OwjDfWLfocE4E5Fo2vMUcw==
   dependencies:
     chalk "4.1.2"
     cli-table3 "0.6.2"
@@ -2368,8 +2368,8 @@
 
 "@strapi/utils@4.24.3":
   version "4.24.3"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@strapi/utils/-/utils-4.24.3.tgz#3c2a0b91d20a4838204dd0ca4ae52319302838e2"
-  integrity sha1-PCoLkdIKSDggTdDKSuUjGTAoOOI=
+  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-4.24.3.tgz#3c2a0b91d20a4838204dd0ca4ae52319302838e2"
+  integrity sha512-yc6F5KOwfMVx68jiD3kcnJMd6qA8rF1iY3o9HRei5Os74ekgylJF++mdZMOFyDgdDUANylq6GVlI+KUTKapoQw==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     date-fns "2.30.0"
@@ -2578,8 +2578,8 @@
 
 "@types/express@*":
   version "4.17.21"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/@types/express/-/express-4.17.21.tgz#c26d4a151e60efe0084b23dc3369ebc631ed192d"
-  integrity sha1-wm1KFR5g7+AISyPcM2nrxjHtGS0=
+  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.21.tgz#c26d4a151e60efe0084b23dc3369ebc631ed192d"
+  integrity sha512-ejlPM315qwLpaQlQDTjPdsUFSc6ZsP4AN6AlWnogPjQ7CVi7PYF3YVz+CY3jE2pwYf7E/7HlDAN0rV2GxTG0HQ==
   dependencies:
     "@types/body-parser" "*"
     "@types/express-serve-static-core" "^4.17.33"
@@ -3668,25 +3668,7 @@ cacheable-request@^7.0.2:
     normalize-url "^6.0.1"
     responselike "^2.0.0"
 
-call-bind-apply-helpers@^1.0.0:
-  version "1.0.2"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.2.tgz#4b5428c222be985d79c3d82657479dbe0b59b2d6"
-  integrity sha1-S1QowiK+mF15w9gmV0edvgtZstY=
-  dependencies:
-    es-errors "^1.3.0"
-    function-bind "^1.1.2"
-
-call-bind@^1.0.0:
-  version "1.0.8"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/call-bind/-/call-bind-1.0.8.tgz#0736a9660f537e3388826f440d5ec45f744eaa4c"
-  integrity sha1-BzapZg9TfjOIgm9EDV7EX3ROqkw=
-  dependencies:
-    call-bind-apply-helpers "^1.0.0"
-    es-define-property "^1.0.0"
-    get-intrinsic "^1.2.4"
-    set-function-length "^1.2.2"
-
-call-bind@^1.0.7:
+call-bind@^1.0.0, call-bind@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/call-bind/-/call-bind-1.0.7.tgz#06016599c40c56498c18769d2730be242b6fa3b9"
   integrity sha512-GHTSNSYICQ7scH7sZ+M2rFopRoLh8t2bLSW6BbgrtLsahOIB5iyAVJf9GjWK3cYTDaMj4XdBpM1cA6pIS0Kv2w==
@@ -3908,8 +3890,8 @@ cli-spinners@^2.0.0, cli-spinners@^2.5.0:
 
 cli-table3@0.6.2:
   version "0.6.2"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/cli-table3/-/cli-table3-0.6.2.tgz#aaf5df9d8b5bf12634dc8b3040806a0c07120d2a"
-  integrity sha1-qvXfnYtb8SY03IswQIBqDAcSDSo=
+  resolved "https://registry.yarnpkg.com/cli-table3/-/cli-table3-0.6.2.tgz#aaf5df9d8b5bf12634dc8b3040806a0c07120d2a"
+  integrity sha512-QyavHCaIC80cMivimWu4aWHilIpiDpfm3hGmqAmXVL1UsnbLuBSMd21hTX6VY4ZSDSM73ESLeF8TOYId3rBTbw==
   dependencies:
     string-width "^4.2.0"
   optionalDependencies:
@@ -4326,8 +4308,8 @@ crelt@^1.0.5:
 
 cron-parser@^3.5.0:
   version "3.5.0"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/cron-parser/-/cron-parser-3.5.0.tgz#b1a9da9514c0310aa7ef99c2f3f1d0f8c235257c"
-  integrity sha1-sanalRTAMQqn75nC8/HQ+MI1JXw=
+  resolved "https://registry.yarnpkg.com/cron-parser/-/cron-parser-3.5.0.tgz#b1a9da9514c0310aa7ef99c2f3f1d0f8c235257c"
+  integrity sha512-wyVZtbRs6qDfFd8ap457w3XVntdvqcwBGxBoTvJQH9KGVKL/fB+h2k3C8AqiVxvUQKN1Ps/Ns46CNViOpVDhfQ==
   dependencies:
     is-nan "^1.3.2"
     luxon "^1.26.0"
@@ -4562,8 +4544,8 @@ define-lazy-prop@^3.0.0:
 
 define-properties@^1.1.3:
   version "1.2.1"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/define-properties/-/define-properties-1.2.1.tgz#10781cc616eb951a80a034bafcaa7377f6af2b6c"
-  integrity sha1-EHgcxhbrlRqAoDS6/Kpzd/avK2w=
+  resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.2.1.tgz#10781cc616eb951a80a034bafcaa7377f6af2b6c"
+  integrity sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg==
   dependencies:
     define-data-property "^1.0.1"
     has-property-descriptors "^1.0.0"
@@ -6511,8 +6493,8 @@ is-lower-case@^1.1.0:
 
 is-nan@^1.3.2:
   version "1.3.2"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/is-nan/-/is-nan-1.3.2.tgz#043a54adea31748b55b6cd4e09aadafa69bd9e1d"
-  integrity sha1-BDpUreoxdItVts1OCara+mm9nh0=
+  resolved "https://registry.yarnpkg.com/is-nan/-/is-nan-1.3.2.tgz#043a54adea31748b55b6cd4e09aadafa69bd9e1d"
+  integrity sha512-E+zBKpQ2t6MEo1VsonYmluk9NxGrbzpeeLC2xIViuO2EjU2xsXsBPwTr3Ykv9l08UYEVEdWeRZNouaZqF6RN0w==
   dependencies:
     call-bind "^1.0.0"
     define-properties "^1.1.3"
@@ -7296,8 +7278,8 @@ lru_map@^0.3.3:
 
 luxon@^1.26.0:
   version "1.28.1"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/luxon/-/luxon-1.28.1.tgz#528cdf3624a54506d710290a2341aa8e6e6c61b0"
-  integrity sha1-UozfNiSlRQbXECkKI0Gqjm5sYbA=
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.28.1.tgz#528cdf3624a54506d710290a2341aa8e6e6c61b0"
+  integrity sha512-gYHAa180mKrNIUJCbwpmD0aTu9kV0dREDrwNnuyFAsO1Wt0EVYSZelPnJlbj9HplzXX/YWXHFTL45kvZ53M0pw==
 
 mailcomposer@3.12.0:
   version "3.12.0"
@@ -7581,8 +7563,8 @@ minipass@^3.0.0:
 
 minipass@^4.0.0:
   version "4.2.8"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/minipass/-/minipass-4.2.8.tgz#f0010f64393ecfc1d1ccb5f582bcaf45f48e1a3a"
-  integrity sha1-8AEPZDk+z8HRzLX1gryvRfSOGjo=
+  resolved "https://registry.yarnpkg.com/minipass/-/minipass-4.2.8.tgz#f0010f64393ecfc1d1ccb5f582bcaf45f48e1a3a"
+  integrity sha512-fNzuVyifolSLFL4NzpF+wEF4qrgqaaKX0haXPQEdQ7NKAN+WecoKMHV09YcuL/DHxrUsYQOK3MiuDf7Ip2OXfQ==
 
 "minipass@^5.0.0 || ^6.0.2 || ^7.0.0", minipass@^7.1.2:
   version "7.1.2"
@@ -7786,8 +7768,8 @@ node-releases@^2.0.18:
 
 node-schedule@2.1.0:
   version "2.1.0"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/node-schedule/-/node-schedule-2.1.0.tgz#068ae38d7351c330616f7fe7cdb05036f977cbaf"
-  integrity sha1-BorjjXNRwzBhb3/nzbBQNvl3y68=
+  resolved "https://registry.yarnpkg.com/node-schedule/-/node-schedule-2.1.0.tgz#068ae38d7351c330616f7fe7cdb05036f977cbaf"
+  integrity sha512-nl4JTiZ7ZQDc97MmpTq9BQjYhq7gOtoh7SiPH069gBFBj0PzD8HI7zyFs6rzqL8Y5tTiEEYLxgtbx034YPrbyQ==
   dependencies:
     cron-parser "^3.5.0"
     long-timeout "0.1.1"
@@ -7930,8 +7912,8 @@ object-inspect@^1.13.1:
 
 object-keys@^1.1.1:
   version "1.1.1"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
-  integrity sha1-HEfyct8nfzsdrwYWd9nILiMixg4=
+  resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
+  integrity sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==
 
 object-visit@^1.0.0:
   version "1.0.1"
@@ -9570,7 +9552,7 @@ set-blocking@^2.0.0:
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==
 
-set-function-length@^1.2.1, set-function-length@^1.2.2:
+set-function-length@^1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/set-function-length/-/set-function-length-1.2.2.tgz#aac72314198eaed975cf77b2c3b6b880695e5449"
   integrity sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==
@@ -10266,8 +10248,8 @@ tar-stream@^3.1.5:
 
 tar@6.1.13:
   version "6.1.13"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/tar/-/tar-6.1.13.tgz#46e22529000f612180601a6fe0680e7da508847b"
-  integrity sha1-RuIlKQAPYSGAYBpv4GgOfaUIhHs=
+  resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.13.tgz#46e22529000f612180601a6fe0680e7da508847b"
+  integrity sha512-jdIBIN6LTIe2jqzay/2vtYLlBHa3JF42ot3h1dW8Q0PaAG4v8rm0cvpVePtau5C6OKXGGcgO9q2AMNSWxiLqKw==
   dependencies:
     chownr "^2.0.0"
     fs-minipass "^2.0.0"
@@ -10968,8 +10950,8 @@ write-file-atomic@^3.0.0:
 
 ws@8.13.0:
   version "8.13.0"
-  resolved "https://pkgs.dev.azure.com/solvexus/_packaging/solvexus-ui/npm/registry/ws/-/ws-8.13.0.tgz#9a9fb92f93cf41512a0735c8f4dd09b8a1211cd0"
-  integrity sha1-mp+5L5PPQVEqBzXI9N0JuKEhHNA=
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.13.0.tgz#9a9fb92f93cf41512a0735c8f4dd09b8a1211cd0"
+  integrity sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==
 
 ws@^7.3.1:
   version "7.5.10"
