@@ -64,6 +64,7 @@ module.exports = {
 
       const { order_id, status, amount } = decodedData;
 
+      
       const existingCurrentOrder = await strapi
         .query('api::order.order')
         .findOne({
