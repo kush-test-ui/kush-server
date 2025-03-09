@@ -1,50 +1,50 @@
-import type { Attribute, Schema } from '@strapi/strapi';
+import type { Schema, Attribute } from '@strapi/strapi';
 
 export interface ComplexCategoryGroup extends Schema.Component {
   collectionName: 'components_complex_category_groups';
   info: {
-    description: '';
     displayName: 'Category';
     icon: 'bulletList';
+    description: '';
   };
   attributes: {
+    title: Attribute.String;
     categories: Attribute.Relation<
       'complex.category-group',
       'oneToMany',
       'api::category.category'
     >;
-    title: Attribute.String;
   };
 }
 
 export interface ComplexCollectionGroup extends Schema.Component {
   collectionName: 'components_complex_collection_groups';
   info: {
-    description: '';
     displayName: 'Collection';
     icon: 'bulletList';
+    description: '';
   };
   attributes: {
+    title: Attribute.String;
     collections: Attribute.Relation<
       'complex.collection-group',
       'oneToMany',
       'api::collection.collection'
     >;
-    title: Attribute.String;
   };
 }
 
 export interface ComplexDeliveryRule extends Schema.Component {
   collectionName: 'components_complex_delivery_rules';
   info: {
-    description: '';
     displayName: 'Delivery Rule';
     icon: 'archive';
+    description: '';
   };
   attributes: {
+    title: Attribute.String;
     description: Attribute.Text;
     icon: Attribute.Enumeration<['clock', 'protect', 'delivery']>;
-    title: Attribute.String;
   };
 }
 
@@ -55,41 +55,41 @@ export interface ComplexFilterForm extends Schema.Component {
     icon: 'cog';
   };
   attributes: {
-    category: Attribute.String;
     categoryFields: Attribute.Component<'elements.input', true>;
     materiaFields: Attribute.Component<'elements.input', true>;
-    material: Attribute.String;
-    price: Attribute.String;
-    resetBtn: Attribute.Component<'elements.button'>;
-    size: Attribute.String;
     sizeFields: Attribute.Component<'elements.input', true>;
     sortFields: Attribute.Component<'elements.input', true>;
+    category: Attribute.String;
+    material: Attribute.String;
+    size: Attribute.String;
+    price: Attribute.String;
     submitBtn: Attribute.Component<'elements.button'>;
+    resetBtn: Attribute.Component<'elements.button'>;
   };
 }
 
 export interface ComplexHeroSection extends Schema.Component {
   collectionName: 'components_layouts_hero_sections';
   info: {
-    description: '';
     displayName: 'Hero';
     icon: 'stack';
+    description: '';
   };
   attributes: {
-    description: Attribute.Text;
-    image: Attribute.Media<'images'>;
-    link: Attribute.Component<'elements.link'>;
-    sub_image: Attribute.Media<'images'>;
     title: Attribute.String;
+    description: Attribute.Text;
+    image: Attribute.Media;
+    link: Attribute.Component<'elements.link'>;
+    sub_image: Attribute.Media;
   };
 }
 
 export interface ComplexProducts extends Schema.Component {
   collectionName: 'components_complex_products';
   info: {
-    description: '';
     displayName: 'Products';
     icon: 'dashboard';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
@@ -99,32 +99,32 @@ export interface ComplexProducts extends Schema.Component {
 export interface ComplexProfileForm extends Schema.Component {
   collectionName: 'components_complex_profile_forms';
   info: {
-    description: '';
     displayName: 'Profile Form';
     icon: 'shield';
+    description: '';
   };
   attributes: {
-    actions: Attribute.Component<'elements.button', true>;
-    additional: Attribute.Component<'elements.input', true>;
-    additionalTitle: Attribute.String;
-    contacts: Attribute.Component<'elements.input', true>;
-    contactsTitle: Attribute.String;
     general: Attribute.Component<'elements.input', true>;
+    additional: Attribute.Component<'elements.input', true>;
+    contacts: Attribute.Component<'elements.input', true>;
     generalTitle: Attribute.String;
+    additionalTitle: Attribute.String;
+    contactsTitle: Attribute.String;
+    actions: Attribute.Component<'elements.button', true>;
   };
 }
 
 export interface ComplexProviders extends Schema.Component {
   collectionName: 'components_complex_providers';
   info: {
-    description: '';
     displayName: 'Providers';
     icon: 'shield';
+    description: '';
   };
   attributes: {
+    text: Attribute.String;
     key: Attribute.Enumeration<['google', 'facebook', 'instagram']> &
       Attribute.DefaultTo<'google'>;
-    text: Attribute.String;
   };
 }
 
@@ -135,28 +135,28 @@ export interface ComplexShoppingCart extends Schema.Component {
     icon: 'shoppingCart';
   };
   attributes: {
-    checkout: Attribute.String;
-    emptyList: Attribute.String;
-    getBack: Attribute.String;
     title: Attribute.String;
     totalPrice: Attribute.String;
+    checkout: Attribute.String;
+    getBack: Attribute.String;
+    emptyList: Attribute.String;
   };
 }
 
 export interface ComplexSpotlight extends Schema.Component {
   collectionName: 'components_complex_spotlights';
   info: {
-    description: '';
     displayName: 'Spotlight';
     icon: 'archive';
+    description: '';
   };
   attributes: {
+    title: Attribute.String;
     products: Attribute.Relation<
       'complex.spotlight',
       'oneToMany',
       'api::product.product'
     >;
-    title: Attribute.String;
   };
 }
 
@@ -166,23 +166,23 @@ export interface ElementsButton extends Schema.Component {
     displayName: 'Button';
   };
   attributes: {
-    loadingText: Attribute.String;
-    text: Attribute.String;
     type: Attribute.String;
+    text: Attribute.String;
+    loadingText: Attribute.String;
   };
 }
 
 export interface ElementsInput extends Schema.Component {
   collectionName: 'components_elements_inputs';
   info: {
-    description: '';
     displayName: 'Input';
     icon: 'pencil';
+    description: '';
   };
   attributes: {
     label: Attribute.String;
-    name: Attribute.String;
     placeholder: Attribute.String;
+    name: Attribute.String;
     type: Attribute.String;
   };
 }
@@ -190,48 +190,48 @@ export interface ElementsInput extends Schema.Component {
 export interface ElementsLink extends Schema.Component {
   collectionName: 'components_elements_links';
   info: {
-    description: '';
     displayName: 'Link';
     icon: 'link';
+    description: '';
   };
   attributes: {
-    isExternal: Attribute.Boolean & Attribute.DefaultTo<false>;
-    text: Attribute.String;
     url: Attribute.String & Attribute.Required;
+    text: Attribute.String;
+    isExternal: Attribute.Boolean & Attribute.DefaultTo<false>;
   };
 }
 
 export interface ElementsSocialLink extends Schema.Component {
   collectionName: 'components_elements_social_links';
   info: {
-    description: '';
     displayName: 'socialLink';
     icon: 'bulletList';
+    description: '';
   };
   attributes: {
     format: Attribute.Enumeration<['facebook', 'instagram', 'tiktok']>;
-    isExternal: Attribute.Boolean;
     url: Attribute.String;
+    isExternal: Attribute.Boolean;
   };
 }
 
 export interface LayoutsFooter extends Schema.Component {
   collectionName: 'components_layouts_footers';
   info: {
-    description: '';
     displayName: 'Footer';
+    description: '';
   };
   attributes: {
-    address: Attribute.String;
-    contactGroupTitle: Attribute.String;
     formField: Attribute.Component<'elements.input'>;
-    links: Attribute.Component<'elements.link', true>;
+    termsLink: Attribute.Component<'elements.link', true>;
     linksGroupTitle: Attribute.String;
-    primaryPhone: Attribute.String;
-    secondaryPhone: Attribute.String;
+    links: Attribute.Component<'elements.link', true>;
+    contactGroupTitle: Attribute.String;
+    address: Attribute.String;
     socialGroupTitle: Attribute.String;
     socialLinks: Attribute.Component<'elements.social-link', true>;
-    termsLink: Attribute.Component<'elements.link', true>;
+    primaryPhone: Attribute.String;
+    secondaryPhone: Attribute.String;
     tertiaryPhone: Attribute.String;
   };
 }
@@ -239,29 +239,29 @@ export interface LayoutsFooter extends Schema.Component {
 export interface LayoutsHeader extends Schema.Component {
   collectionName: 'components_layouts_headers';
   info: {
-    description: '';
     displayName: 'Header';
+    description: '';
   };
   attributes: {
+    logoText: Attribute.Component<'elements.link'>;
+    cta: Attribute.Component<'elements.link'>;
+    sessionLinks: Attribute.Component<'elements.link', true> &
+      Attribute.Required;
+    pages: Attribute.Component<'elements.link', true>;
+    collections: Attribute.Relation<
+      'layouts.header',
+      'oneToMany',
+      'api::collection.collection'
+    >;
     categories: Attribute.Relation<
       'layouts.header',
       'oneToMany',
       'api::category.category'
     >;
     categoryTitle: Attribute.String;
-    collections: Attribute.Relation<
-      'layouts.header',
-      'oneToMany',
-      'api::collection.collection'
-    >;
     collectionTitle: Attribute.String;
-    cta: Attribute.Component<'elements.link'>;
-    logoText: Attribute.Component<'elements.link'>;
-    pages: Attribute.Component<'elements.link', true>;
     pagesTitle: Attribute.String;
     searchTitle: Attribute.String;
-    sessionLinks: Attribute.Component<'elements.link', true> &
-      Attribute.Required;
     signOutTitle: Attribute.String &
       Attribute.Required &
       Attribute.DefaultTo<'Sign out'>;
@@ -275,12 +275,6 @@ export interface SharedMetaSocial extends Schema.Component {
     icon: 'project-diagram';
   };
   attributes: {
-    description: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 65;
-      }>;
-    image: Attribute.Media<'images' | 'files' | 'videos'>;
     socialNetwork: Attribute.Enumeration<['Facebook', 'Twitter']> &
       Attribute.Required;
     title: Attribute.String &
@@ -288,6 +282,12 @@ export interface SharedMetaSocial extends Schema.Component {
       Attribute.SetMinMaxLength<{
         maxLength: 60;
       }>;
+    description: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 65;
+      }>;
+    image: Attribute.Media;
   };
 }
 
@@ -298,24 +298,24 @@ export interface SharedSeo extends Schema.Component {
     icon: 'search';
   };
   attributes: {
-    canonicalURL: Attribute.String;
-    keywords: Attribute.Text;
-    metaDescription: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 160;
-        minLength: 50;
-      }>;
-    metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
-    metaRobots: Attribute.String;
-    metaSocial: Attribute.Component<'shared.meta-social', true>;
     metaTitle: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
         maxLength: 60;
       }>;
-    metaViewport: Attribute.String;
+    metaDescription: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 50;
+        maxLength: 160;
+      }>;
+    metaImage: Attribute.Media;
+    metaSocial: Attribute.Component<'shared.meta-social', true>;
+    keywords: Attribute.Text;
+    metaRobots: Attribute.String;
     structuredData: Attribute.JSON;
+    metaViewport: Attribute.String;
+    canonicalURL: Attribute.String;
   };
 }
 
