@@ -1,7 +1,15 @@
 module.exports = [
   'strapi::logger',
   'strapi::errors',
-  'strapi::cors',
+  {
+    name: 'strapi::cors',
+    config: {
+      enabled: true,
+      headers: '*',
+      origin: ['*'],
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+    }
+  },
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
@@ -15,19 +23,31 @@ module.exports = [
         useDefaults: true,
         directives: {
           upgradeInsecureRequests: null,
-          'connect-src': ["'self'", 'https:', 'http:'],
-          'frame-src': ["'self'", 'editor.unlayer.com'],
+          'connect-src': [
+            "'self'",
+            'https:',
+            'http:',
+            'api.telegram.org',
+            'api.liqpay.ua'
+          ],
+          'frame-src': [
+            "'self'",
+            'editor.unlayer.com',
+            '*.liqpay.ua'
+          ],
           'script-src': [
             "'self'",
             "'unsafe-inline'",
             'editor.unlayer.com',
             'maps.googleapis.com',
+            '*.liqpay.ua'
           ],
           'script-src-elem': [
             "'self'",
             "'unsafe-inline'",
             'editor.unlayer.com',
             'maps.googleapis.com',
+            '*.liqpay.ua'
           ],
           'media-src': [
             "'self'",
@@ -35,7 +55,7 @@ module.exports = [
             'blob:',
             'res.cloudinary.com',
             'maps.gstatic.com',
-            'maps.googleapis.com',
+            'maps.googleapis.com'
           ],
           'img-src': [
             "'self'",
@@ -48,6 +68,7 @@ module.exports = [
             'market-assets.strapi.io',
             'maps.gstatic.com',
             'maps.googleapis.com',
+            '*.liqpay.ua',
             'khmdb0.google.com',
             'khmdb0.googleapis.com',
             'khmdb1.google.com',
@@ -68,7 +89,16 @@ module.exports = [
             'khms3.googleapis.com',
             'streetviewpixels-pa.googleapis.com',
           ],
+          'form-action': [
+            "'self'",
+            '*.liqpay.ua'
+          ],
         },
+      },
+      frameguard: {
+        enable: true,
+        policy: 'allow-from',
+        domains: ['*.liqpay.ua']
       },
     },
   },

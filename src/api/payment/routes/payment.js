@@ -14,6 +14,7 @@ module.exports = {
       path: '/payment/callback',
       handler: 'payment.callback',
       config: {
+        auth: false,
         policies: [],
         middlewares: [],
       },
