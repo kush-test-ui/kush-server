@@ -14,6 +14,20 @@ const hash = (data) => {
     .digest('hex');
 };
 
+// Standard TikTok Events
+const TIKTOK_EVENTS = {
+  VIEW_CONTENT: "ViewContent",
+  SEARCH: "Search",
+  ADD_TO_CART: "AddToCart",
+  ADD_TO_WISHLIST: "AddToWishlist",
+  INITIATE_CHECKOUT: "InitiateCheckout",
+  PURCHASE: "Purchase",
+  SUBSCRIBE: "Subscribe",
+  CONTACT: "Contact",
+  COMPLETE_REGISTRATION: "CompleteRegistration",
+  SUBMIT_FORM: "SubmitForm",
+};
+
 module.exports = {
   async sendMetaEvent(ctx) {
     const { event_name, event_time, user_data, custom_data, action_source } =
@@ -72,6 +86,81 @@ module.exports = {
     } catch (error) {
       console.error(`Error sending ${event_name} event:`, error.message);
       return ctx.badRequest('Failed to send event');
+    }
+  },
+  
+  async sendTikTokEvent(ctx) {
+    const { event_name, event_time, user_data, custom_data, event_source } =
+      ctx.request.body;
+      
+    // Validate event name
+    if (!Object.values(TIKTOK_EVENTS).includes(event_name)) {
+      return ctx.badRequest('Invalid event name. Must be one of the standard TikTok events.');
+    }
+
+    const pixelId = process.env.TIKTOK_PIXEL_ID || 'D07OAKBC77UFFMMCNQE0';
+    const accessToken =
+      process.env.TIKTOK_ACCESS_TOKEN ||
+      '2d08f3d32d31eb0a256c6d2e197b6b982f61e60d';
+
+    // Hash sensitive user data
+    const hashedUserData = {
+      email: user_data?.email ? hash(user_data.email) : null,
+      phone_number: user_data?.phoneNumber ? hash(user_data.phoneNumber) : null,
+      external_id: user_data?.id ? hash(user_data.id) : null,
+      ip: ctx.request.ip || '0.0.0.0',
+      user_agent: ctx.request.headers['user-agent'] || null,
+    };
+
+    // Filter out null values
+    Object.keys(hashedUserData).forEach(key => 
+      hashedUserData[key] === null && delete hashedUserData[key]
+    );
+
+    const timestamp = event_time || Math.floor(Date.now() / 1000);
+    
+    const payload = {
+      pixel_code: pixelId,
+      event: event_name,
+      timestamp: timestamp,
+      context: {
+        user: hashedUserData,
+        page: {
+          url: ctx.request.body.page_url || ctx.request.headers.referer || null,
+        }
+      },
+      properties: custom_data,
+      source: event_source || "web"
+    };
+
+    try {
+      const response = await fetch(
+        `https://business-api.tiktok.com/open_api/v1.3/pixel/track/`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Token': accessToken
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        console.error(`Error sending TikTok ${event_name} event:`, errorResponse);
+        return ctx.badRequest('Failed to send TikTok event', errorResponse);
+      }
+
+      const responseData = await response.json();
+
+      return ctx.send({
+        message: `TikTok ${event_name} event sent successfully`,
+        response: responseData,
+      });
+    } catch (error) {
+      console.error(`Error sending TikTok ${event_name} event:`, error.message);
+      return ctx.badRequest('Failed to send TikTok event');
     }
   },
 };
