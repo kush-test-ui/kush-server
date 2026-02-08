@@ -36,7 +36,11 @@ const postTelegramNotification = async ({ order_id, status, customer, amount, up
 module.exports = {
   async create(ctx) {
     const public_key = 'i85549703498';
-    const private_key = 'CT9i3VSrVlUaDxuKlGZEj5HHRtC6JWHK2gg9SP2P';
+    const private_key = 'n6JKQIKKGswTTgKhRcsaP9L0O6L8J5fXAL6FT6sZ';
+
+    if (!public_key || !private_key) {
+      return ctx.send({ status: 500, message: 'LiqPay keys are not configured' });
+    }
 
     const {
       amount,
@@ -63,8 +67,8 @@ module.exports = {
         result_url: 'https://www.kush.jewelry/uk/?checkout=success',
         sender_first_name: customer.firstName,
         sender_last_name: customer.lastName,
-        sender_city: customer.city,
-        sender_address: customer.warehouse,
+        sender_city: customer.customer_city,
+        sender_address: customer.customer_warehouse,
         sender_email: customer.email,
         sender_phone: customer.phone,
       })
@@ -82,6 +86,10 @@ module.exports = {
   async callback(ctx) {
     if (ctx.request.method === 'POST') {
       const private_key = 'n6JKQIKKGswTTgKhRcsaP9L0O6L8J5fXAL6FT6sZ';
+
+      if (!private_key) {
+        return ctx.send({ status: 500, message: 'LiqPay keys are not configured' });
+      }
       
 
       const { data, signature, userId, products, customer } = ctx.request.body;
