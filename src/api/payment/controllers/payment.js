@@ -81,7 +81,8 @@ module.exports = {
 
   async callback(ctx) {
     if (ctx.request.method === 'POST') {
-      const private_key = 'CT9i3VSrVlUaDxuKlGZEj5HHRtC6JWHK2gg9SP2P';
+      const private_key = 'n6JKQIKKGswTTgKhRcsaP9L0O6L8J5fXAL6FT6sZ';
+      
 
       const { data, signature, userId, products, customer } = ctx.request.body;
 
