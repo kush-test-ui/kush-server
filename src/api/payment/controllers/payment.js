@@ -50,7 +50,11 @@ module.exports = {
       shop_name,
       rro_info,
       customer,
+      language,
     } = ctx.request.body;
+
+    const supportedLanguages = ['uk', 'en', 'ru'];
+    const normalizedLanguage = supportedLanguages.includes(language) ? language : 'uk';
 
     const data = Buffer.from(
       JSON.stringify({
@@ -63,6 +67,7 @@ module.exports = {
         public_key,
         description,
         action: 'pay',
+        language: normalizedLanguage,
         server_url: 'https://api.kush.jewelry/api/payment/callback',
         result_url: 'https://www.kush.jewelry/uk/?checkout=success',
         sender_first_name: customer.firstName,
