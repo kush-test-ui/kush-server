@@ -1,33 +1,71 @@
-name: Push
+name: Deploy Backend
+
 on:
   push:
-    branches: ['main']
-  pull_request:
-    branches: ['main']
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
 jobs:
-  test:
-    runs-on: self-hosted
+  deploy:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Make deploy script executable
+        run: chmod +x ./ci/deploy.sh
+
       - name: Deploy
         run: ./ci/deploy.sh
         env:
-          APP_KEYS: ${{ secrets.APP_KEYS }}
           HOST: 0.0.0.0
           PORT: 1337
+          PUBLIC_URL: https://api.kush.jewelry
+
+          APP_KEYS: ${{ secrets.APP_KEYS }}
           API_TOKEN_SALT: ${{ secrets.API_TOKEN_SALT }}
           ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           TRANSFER_TOKEN_SALT: ${{ secrets.TRANSFER_TOKEN_SALT }}
+
           DATABASE_CLIENT: postgres
-          DATABASE_HOST: kush-postgres
-          DATABASE_PORT: 5432
-          DATABASE_NAME: api
-          DATABASE_USERNAME: strapi_admin
+          DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+          DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+          DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+          DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          DATABASE_SSL: false
+          DATABASE_SSL: ${{ secrets.DATABASE_SSL }}
+
+          MONO_MERCHANT_TOKEN: ${{ secrets.MONO_MERCHANT_TOKEN }}
+          MONO_API_URL: ${{ secrets.MONO_API_URL }}
+          PAYMENT_WEBHOOK_URL: ${{ secrets.PAYMENT_WEBHOOK_URL }}
+          PAYMENT_RESULT_URL: ${{ secrets.PAYMENT_RESULT_URL }}
+          PAYMENT_RESULT_URL_UK: ${{ secrets.PAYMENT_RESULT_URL_UK }}
+          PAYMENT_RESULT_URL_EN: ${{ secrets.PAYMENT_RESULT_URL_EN }}
+          MONO_WIDGET_KEY_ID: ${{ secrets.MONO_WIDGET_KEY_ID }}
+          MONO_WIDGET_PRIVATE_KEY: ${{ secrets.MONO_WIDGET_PRIVATE_KEY }}
+
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          PUBLIC_URL: https://api.kush.jewelry
+
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
           CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
+
+          NOVA_POSHTA_API_KEY: ${{ secrets.NOVA_POSHTA_API_KEY }}
+
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          TG_CHAT_ORDER_ID: ${{ secrets.TG_CHAT_ORDER_ID }}
+
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_DOMAIN_NAME: ${{ secrets.RESEND_DOMAIN_NAME }}
+
+          FACEBOOK_PIXEL_ID: ${{ secrets.FACEBOOK_PIXEL_ID }}
+          FACEBOOK_ACCESS_TOKEN: ${{ secrets.FACEBOOK_ACCESS_TOKEN }}
