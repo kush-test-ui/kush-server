@@ -35,6 +35,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 // this module inputs ctx (Strapi/Koa), handles mono payment create (iframe invoice) and webhook callback, returns HTTP responses
+const crypto = require('crypto');
 
 const PAYMENT_RESULT_URL_UK = process.env.PAYMENT_RESULT_URL_UK
   || process.env.PAYMENT_RESULT_URL
@@ -127,20 +128,24 @@ module.exports = {
       ? `Payment for product${productNames ? `: ${productNames}` : ''}`
       : `Оплата за товар${productNames ? `: ${productNames}` : ''}`;
 
+    const widgetOrderData = {
+      amount: amountKopecks,
+      ccy: 980,
+      merchantPaymInfo: {
+        reference: order_id,
+        destination: paymentLabel,
+        comment: paymentLabel,
+        basketOrder,
+      },
+      redirectUrl,
+      webHookUrl: PAYMENT_WEBHOOK_URL,
+      validity: 3600,
+    };
+
     let invoiceData;
     try {
       invoiceData = await monoService.createInvoice({
-        amount: amountKopecks,
-        ccy: 980,
-        merchantPaymInfo: {
-          reference: order_id,
-          destination: paymentLabel,
-          comment: paymentLabel,
-          basketOrder,
-        },
-        redirectUrl,
-        webHookUrl: PAYMENT_WEBHOOK_URL,
-        validity: 3600,
+        ...widgetOrderData,
         displayType: 'iframe',
       });
     } catch (err) {
@@ -174,7 +179,21 @@ module.exports = {
       return ctx.send({ status: 500, message: 'Failed to create order' });
     }
 
-    return ctx.send({ checkoutUrl: pageUrl, invoiceId, orderId: order.id, reference: order_id });
+    let monoWidgetConfig = null;
+    try {
+      // optional widget config for extra payment method under iframe
+      monoWidgetConfig = monoService.buildWidgetConfig(widgetOrderData, crypto.randomUUID());
+    } catch (err) {
+      strapi.log.warn('Mono buildWidgetConfig skipped:', err?.message || err);
+    }
+
+    return ctx.send({
+      checkoutUrl: pageUrl,
+      invoiceId,
+      orderId: order.id,
+      reference: order_id,
+      monoWidgetConfig,
+    });
   },
 
   // inputs ctx with mono webhook body + X-Sign header,
