@@ -5,6 +5,7 @@ module.exports = {
       path: '/currency-change',
       handler: 'currency-change.getRates',
       config: {
+        auth: false,
         policies: [],
         middlewares: [],
       },
