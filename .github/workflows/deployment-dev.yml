@@ -46,7 +46,7 @@ jobs:
           TG_CHAT_ORDER_ID: ${{ secrets.TG_CHAT_ORDER_ID }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           RESEND_DOMAIN_NAME: ${{ secrets.RESEND_DOMAIN_NAME }}
-          PUBLIC_URL: https://cheerful-boot-ecbc15ae2e.strapiapp.com
+          PUBLIC_URL: https://successful-dinosaur-0643ab37be.strapiapp.com
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
           CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
