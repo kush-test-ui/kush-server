@@ -4,17 +4,13 @@ on:
     branches: ['main']
   pull_request:
     branches: ['main']
-
-permissions:
-  contents: read
-
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - name: Build Docker image (CI fallback)
-        run: docker build --build-arg PUBLIC_URL="${PUBLIC_URL}" -t kush-e-commerce-back:${{ github.run_id }} .
+      - name: Deploy
+        run: ./ci/deploy.sh
         env:
           APP_KEYS: ${{ secrets.APP_KEYS }}
           HOST: 0.0.0.0
@@ -30,23 +26,8 @@ jobs:
           DATABASE_USERNAME: strapi_admin
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           DATABASE_SSL: false
-          MONO_MERCHANT_TOKEN: ${{ secrets.MONO_MERCHANT_TOKEN }}
-          MONO_API_URL: https://api.monobank.ua
-          PAYMENT_WEBHOOK_URL: ${{ secrets.PAYMENT_WEBHOOK_URL }}
-          PAYMENT_RESULT_URL: ${{ secrets.PAYMENT_RESULT_URL }}
-          MONO_WIDGET_KEY_ID: ${{ secrets.MONO_WIDGET_KEY_ID }}
-          MONO_WIDGET_PRIVATE_KEY: ${{ secrets.MONO_WIDGET_PRIVATE_KEY }}
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          NOVA_POSHTA_API_KEY: ${{ secrets.NOVA_POSHTA_API_KEY }}
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
-          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
-          TG_CHAT_ORDER_ID: ${{ secrets.TG_CHAT_ORDER_ID }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          RESEND_DOMAIN_NAME: ${{ secrets.RESEND_DOMAIN_NAME }}
-          PUBLIC_URL: https://successful-dinosaur-0643ab37be.strapiapp.com
+          PUBLIC_URL: https://api.kush.jewelry
           CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
           CLOUDINARY_KEY: ${{ secrets.CLOUDINARY_KEY }}
           CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
