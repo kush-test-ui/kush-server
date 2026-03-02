@@ -1749,6 +1749,7 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     customer_city: Attribute.String;
     customer_warehouse: Attribute.String;
     self_delivery: Attribute.Boolean & Attribute.DefaultTo<false>;
+    mono_modified_date: Attribute.BigInteger;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

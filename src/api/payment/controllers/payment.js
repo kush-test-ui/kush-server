@@ -1,216 +1,275 @@
-const crypto = require('crypto');
+'use strict';
 
+// ─── LiqPay (commented — replaced by mono) ────────────────────────────────────
+// const crypto = require('crypto');
+//
+// const generatePayload = ({ order_id, status, customer, amount, updatedProducts }) => {
+//   return `
+// <b>Замовлення №:</b> ${order_id}
+// <b>Cтатус: </b> ${status}
+// <b>Покупець:</b> ${customer.firstName} ${customer.lastName}
+// <b>Номер телефону:</b> +${customer.phone}
+// <b>Пошта:</b> ${customer.email}
+// <b>Товар:</b>${updatedProducts.map(({ name, size, material }) =>
+//   `${name}\n${size ? `<b>Розмір:</b> ${size}\n` : ''}${material ? `<b>Матеріал:</b> ${material}` : ''}`).join('')}
+// <b>Cума оплати:</b> ${amount} грн.
+// <b>Доставка:</b> ${
+//   customer.self_delivery
+//     ? 'Самовивіз'
+//     : `\n<b>Місто:</b> ${customer.customer_city}\n<b>Відділення:</b> ${customer.customer_warehouse}`
+//   }`;
+// };
+//
+// module.exports = {
+//   async create(ctx) {
+//     const public_key = 'i85549703498';
+//     const private_key = 'n6JKQIKKGswTTgKhRcsaP9L0O6L8J5fXAL6FT6sZ';
+//     ... (LiqPay data/signature creation) ...
+//     return ctx.send({ data, signature });
+//   },
+//   async callback(ctx) {
+//     const private_key = 'n6JKQIKKGswTTgKhRcsaP9L0O6L8J5fXAL6FT6sZ';
+//     ... (LiqPay sha1 signature verify, order create/update) ...
+//   },
+// };
+// ─────────────────────────────────────────────────────────────────────────────
 
-const generatePayload = ({ order_id, status, customer, amount, updatedProducts }) => {
-  return `
+// this module inputs ctx (Strapi/Koa), handles mono payment create (iframe invoice) and webhook callback, returns HTTP responses
+
+const PAYMENT_RESULT_URL_UK = process.env.PAYMENT_RESULT_URL_UK
+  || process.env.PAYMENT_RESULT_URL
+  || 'https://www.kush.jewelry/uk/?checkout=success';
+const PAYMENT_RESULT_URL_EN = process.env.PAYMENT_RESULT_URL_EN || 'https://www.kush.jewelry/en/?checkout=success';
+const PAYMENT_WEBHOOK_URL = process.env.PAYMENT_WEBHOOK_URL || 'https://api.kush.jewelry/api/payment/callback';
+
+// mono status -> internal status mapping
+const MONO_STATUS_MAP = {
+  success: 'success',
+  processing: 'wait_secure',
+  hold: 'wait_secure',
+  failure: 'failure',
+  expired: 'failure',
+  reversed: 'failure',
+  created: 'created',
+};
+
+// inputs {order_id, status, customer, amount, updatedProducts}, sends Telegram message
+const postTelegramNotification = async ({ order_id, status, customer, amount, updatedProducts }) => {
+  const text = `
 <b>Замовлення №:</b> ${order_id}
 <b>Cтатус: </b> ${status}
 <b>Покупець:</b> ${customer.firstName} ${customer.lastName}
 <b>Номер телефону:</b> +${customer.phone}
 <b>Пошта:</b> ${customer.email}
 <b>Товар:</b>${updatedProducts.map(({ name, size, material }) =>
-`${name}\n${size ? `<b>Розмір:</b> ${size}\n` : ''}${material ? `<b>Матеріал:</b> ${material}` : ''}`).join('')}
+    `${name}\n${size ? `<b>Розмір:</b> ${size}\n` : ''}${material ? `<b>Матеріал:</b> ${material}` : ''}`).join('')}
 <b>Cума оплати:</b> ${amount} грн.
 <b>Доставка:</b> ${
   customer.self_delivery
     ? 'Самовивіз'
     : `\n<b>Місто:</b> ${customer.customer_city}\n<b>Відділення:</b> ${customer.customer_warehouse}`
   }`;
-}
 
-const postTelegramNotification = async ({ order_id, status, customer, amount, updatedProducts }) => {
-  await fetch(
-    `https://api.telegram.org/bot${process.env.TG_TOKEN}/sendMessage`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: `${process.env.TG_CHAT_ORDER_ID}`,
-        parse_mode: 'HTML',
-        text: generatePayload({ order_id, status, customer, amount, updatedProducts }),
-      }),
-    }
-  );
-}
+  await fetch(`https://api.telegram.org/bot${process.env.TG_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: `${process.env.TG_CHAT_ORDER_ID}`,
+      parse_mode: 'HTML',
+      text,
+    }),
+  });
+};
 
 module.exports = {
+  // inputs ctx with {amount, currency, order_id, description, products, customer, language},
+  // creates mono invoice with displayType=iframe and pending order, returns {checkoutUrl, invoiceId, orderId}
   async create(ctx) {
-    const public_key = 'i85549703498';
-    const private_key = 'n6JKQIKKGswTTgKhRcsaP9L0O6L8J5fXAL6FT6sZ';
-
-    if (!public_key || !private_key) {
-      return ctx.send({ status: 500, message: 'LiqPay keys are not configured' });
-    }
-
     const {
       amount,
-      currency,
-      description,
       order_id,
-      shop_name,
-      rro_info,
+      products,
       customer,
       language,
     } = ctx.request.body;
 
-    const supportedLanguages = ['uk', 'en', 'ru'];
-    const normalizedLanguage = supportedLanguages.includes(language) ? language : 'uk';
+    if (!amount || !order_id) {
+      return ctx.send({ status: 400, message: 'Missing required fields: amount, order_id' });
+    }
 
-    const data = Buffer.from(
-      JSON.stringify({
-        amount,
-        version: '3',
-        currency,
-        order_id,
-        rro_info,
-        shop_name,
-        public_key,
-        description,
-        action: 'pay',
-        language: normalizedLanguage,
-        server_url: 'https://api.kush.jewelry/api/payment/callback',
-        result_url: 'https://www.kush.jewelry/uk/?checkout=success',
-        sender_first_name: customer.firstName,
-        sender_last_name: customer.lastName,
-        sender_city: customer.customer_city,
-        sender_address: customer.customer_warehouse,
-        sender_email: customer.email,
-        sender_phone: customer.phone,
-      })
-    ).toString('base64');
-    
+    const monoService = strapi.service('api::payment.payment');
 
-    const signature = crypto
-      .createHash('sha1')
-      .update(private_key + data + private_key)
-      .digest('base64');
+    // mono expects amount in kopecks (minimum units)
+    const amountKopecks = Math.round(parseFloat(amount) * 100);
 
-    return ctx.send({ data, signature });
+    const basketOrder = Array.isArray(products)
+      ? products.map((p) => ({
+          name: p.name || 'Товар',
+          qty: p.quantity || 1,
+          sum: Math.round(parseFloat(p.price || 0) * 100),
+          total: Math.round(parseFloat(p.price || 0) * 100 * (p.quantity || 1)),
+          unit: 'шт.',
+          code: String(p.id || ''),
+          icon: p.icon || undefined,
+        }))
+      : [];
+
+    const currentLanguage = language === 'en' ? 'en' : 'uk';
+    const redirectUrl = currentLanguage === 'en' ? PAYMENT_RESULT_URL_EN : PAYMENT_RESULT_URL_UK;
+
+    const productNames = Array.isArray(products)
+      ? products
+        .map((p) => p?.name)
+        .filter(Boolean)
+        .join(', ')
+      : '';
+    const paymentLabel = currentLanguage === 'en'
+      ? `Payment for product${productNames ? `: ${productNames}` : ''}`
+      : `Оплата за товар${productNames ? `: ${productNames}` : ''}`;
+
+    let invoiceData;
+    try {
+      invoiceData = await monoService.createInvoice({
+        amount: amountKopecks,
+        ccy: 980,
+        merchantPaymInfo: {
+          reference: order_id,
+          destination: paymentLabel,
+          comment: paymentLabel,
+          basketOrder,
+        },
+        redirectUrl,
+        webHookUrl: PAYMENT_WEBHOOK_URL,
+        validity: 3600,
+        displayType: 'iframe',
+      });
+    } catch (err) {
+      strapi.log.error('Mono createInvoice iframe error:', err);
+      return ctx.send({ status: 500, message: 'Failed to create mono iframe invoice' });
+    }
+
+    const { invoiceId, pageUrl } = invoiceData;
+
+    // create order before payment with invoiceId for direct webhook matching
+    let order;
+    try {
+      order = await strapi.query('api::order.order').create({
+        data: {
+          status: 'created',
+          paymentIntentID: invoiceId,
+          amount: amountKopecks,
+          products: Array.isArray(products) ? products : [],
+          customer_firstName: customer?.firstName || '',
+          customer_lastName: customer?.lastName || '',
+          customer_email: customer?.email || '',
+          customer_phone: customer?.phone || '',
+          customer_city: customer?.customer_city || '',
+          customer_warehouse: customer?.customer_warehouse || '',
+          self_delivery: customer?.self_delivery || false,
+          publishedAt: new Date(),
+        },
+      });
+    } catch (err) {
+      strapi.log.error('Mono order create error:', err);
+      return ctx.send({ status: 500, message: 'Failed to create order' });
+    }
+
+    return ctx.send({ checkoutUrl: pageUrl, invoiceId, orderId: order.id, reference: order_id });
   },
 
+  // inputs ctx with mono webhook body + X-Sign header,
+  // verifies ECDSA signature, updates order status, returns 200 OK
   async callback(ctx) {
-    if (ctx.request.method === 'POST') {
-      const private_key = 'n6JKQIKKGswTTgKhRcsaP9L0O6L8J5fXAL6FT6sZ';
+    if (ctx.request.method !== 'POST') {
+      return ctx.send({ status: 405, message: 'Method not allowed' });
+    }
 
-      if (!private_key) {
-        return ctx.send({ status: 500, message: 'LiqPay keys are not configured' });
-      }
-      
+    // unparsedBody contains the original raw bytes as received — required for ECDSA verification
+    // strapi::body middleware is configured with includeUnparsed: true
+    const rawBody = ctx.request.body[Symbol.for('unparsedBody')] || JSON.stringify(ctx.request.body);
+    const xSign = ctx.request.headers['x-sign'];
 
-      const { data, signature, userId, products, customer } = ctx.request.body;
+    if (!xSign) {
+      strapi.log.warn('Mono webhook: missing X-Sign header');
+      return ctx.send({ status: 400, message: 'Missing X-Sign header' });
+    }
 
-      if (!data || !signature) {
-        return ctx.send({ status: 400, message: 'Missing required fields' });
-      }
+    const monoService = strapi.service('api::payment.payment');
 
-      const expectedSignature = crypto
-        .createHash('sha1')
-        .update(private_key + data + private_key)
-        .digest('base64');
+    const isValid = await monoService.verifySignature(rawBody, xSign);
+    if (!isValid) {
+      strapi.log.warn('Mono webhook: invalid signature');
+      return ctx.send({ status: 401, message: 'Invalid signature' });
+    }
 
-      if (signature !== expectedSignature) {
-        return ctx.send({ status: 400, message: 'Invalid signature' });
-      }
+    const payload = ctx.request.body;
 
-      const decodedData = JSON.parse(Buffer.from(data, 'base64').toString('utf-8'));
-      const { order_id, status, amount } = decodedData;
+    const { invoiceId, status: monoStatus, modifiedDate, amount } = payload;
+    // reference from merchantPaymInfo is used as fallback for mixed flows
+    const reference = payload?.merchantPaymInfo?.reference || payload?.reference;
 
-      // Визначаємо пріоритет статусів
-      const statusPriority = {
-        'success': 3,
-        'wait_secure': 2,
-        'failure': 1,
-        'error': 1,
-        'try_again': 1
+    if (!invoiceId) {
+      return ctx.send({ status: 400, message: 'Missing invoiceId' });
+    }
+
+    const internalStatus = MONO_STATUS_MAP[monoStatus] || 'failure';
+
+    // find order: first by reference (widget flow), then by invoiceId (legacy/redirect flow)
+    const existingOrder = reference
+      ? await strapi.query('api::order.order').findOne({ where: { paymentIntentID: reference } })
+        || await strapi.query('api::order.order').findOne({ where: { paymentIntentID: invoiceId } })
+      : await strapi.query('api::order.order').findOne({ where: { paymentIntentID: invoiceId } });
+
+    if (!existingOrder) {
+      strapi.log.warn(`Mono webhook: order not found for invoiceId=${invoiceId}`);
+      // return 200 so mono does not retry endlessly
+      return ctx.send({ status: 200, message: 'Order not found, ignored' });
+    }
+
+    // idempotency: only update if webhook is newer than last stored event
+    const storedDate = existingOrder.mono_modified_date ? Number(existingOrder.mono_modified_date) : 0;
+    const incomingDate = modifiedDate ? modifiedDate * 1000 : Date.now();
+
+    if (incomingDate <= storedDate) {
+      return ctx.send({ status: 200, message: 'Stale event, ignored' });
+    }
+
+    const updatedProducts = (existingOrder.products || []).map((p) => ({ ...p, status: internalStatus }));
+
+    try {
+      await strapi.query('api::order.order').update({
+        where: { id: existingOrder.id },
+        data: {
+          status: internalStatus,
+          products: updatedProducts,
+          mono_modified_date: incomingDate,
+        },
+      });
+    } catch (err) {
+      strapi.log.error('Mono order update error:', err);
+      return ctx.send({ status: 500, message: 'Order update failed' });
+    }
+
+    if (internalStatus === 'success') {
+      const customer = {
+        firstName: existingOrder.customer_firstName,
+        lastName: existingOrder.customer_lastName,
+        email: existingOrder.customer_email,
+        phone: existingOrder.customer_phone,
+        customer_city: existingOrder.customer_city,
+        customer_warehouse: existingOrder.customer_warehouse,
+        self_delivery: existingOrder.self_delivery,
       };
-
-      // Перевіряємо існуюче замовлення
-      const existingOrder = await strapi
-        .query('api::order.order')
-        .findOne({
-          where: { paymentIntentID: order_id },
-        });
-
-      // Якщо замовлення існує
-      if (existingOrder) {
-        const currentPriority = statusPriority[existingOrder.status] || 0;
-        const newPriority = statusPriority[status] || 0;
-
-        // Оновлюємо тільки якщо новий статус має вищий пріоритет
-        if (newPriority > currentPriority) {
-          try {
-            const updatedProducts = products.map((product) => ({ ...product, status }));
-            
-            const updatedOrder = await strapi.query('api::order.order').update({
-              where: { id: existingOrder.id },
-              data: {
-                status,
-                products: updatedProducts,
-              },
-            });
-
-            // Відправляємо повідомлення в Telegram тільки при успішній оплаті
-            if (status === 'success') {
-              await postTelegramNotification({ order_id, status, customer, amount, updatedProducts });
-            }
-
-            return ctx.send({
-              status: 200,
-              order: updatedOrder,
-              message: 'Order updated successfully',
-            });
-          } catch (error) {
-            console.error('Error updating order:', error);
-            return ctx.send({ status: 500, message: 'Error updating order' });
-          }
-        }
-
-        return ctx.send({
-          status: 200,
-          order: existingOrder,
-          message: 'Order already exists with same or higher priority status',
-        });
-      }
-
-      if (!['error', 'failure', 'try_again'].includes(status)) {
-        try {
-          const updatedProducts = products.map((product) => ({ ...product, status }));
-          
-          const order = await strapi.query('api::order.order').create({
-            data: {
-              user: userId ? { connect: { id: userId } } : null,
-              amount,
-              status,
-              paymentIntentID: order_id,
-              products: updatedProducts,
-              customer_firstName: customer.firstName,
-              customer_lastName: customer.lastName,
-              customer_email: customer.email,
-              customer_phone: customer.phone,
-              customer_city: customer.customer_city,
-              customer_warehouse: customer.customer_warehouse,
-              publishedAt: new Date(),
-              self_delivery: customer.self_delivery,
-            },
-          });
-
-          await postTelegramNotification({ order_id, status, customer, amount, updatedProducts });
-          
-          return ctx.send({
-            status: 200,
-            order: order,
-            message: 'Transaction complete',
-          });
-        } catch (error) {
-          return ctx.send({ status: 500, message: 'Internal Server Error' });
-        }
-      }
-
-      return ctx.send({
-        status: 204,
-        order: null,
-        message: status,
+      const amountUah = (amount || existingOrder.amount) / 100;
+      await postTelegramNotification({
+        order_id: invoiceId,
+        status: internalStatus,
+        customer,
+        amount: amountUah,
+        updatedProducts,
       });
     }
+
+    return ctx.send({ status: 200, message: 'OK' });
   },
 };

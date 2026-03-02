@@ -4,7 +4,14 @@ module.exports = [
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::query',
-  'strapi::body',
+  {
+    name: 'strapi::body',
+    config: {
+      // includeUnparsed saves raw body at ctx.request.body[Symbol.for('unparsedBody')]
+      // required for ECDSA verification of mono webhooks (signature must match exact original bytes)
+      includeUnparsed: true,
+    },
+  },
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
@@ -20,26 +27,31 @@ module.exports = [
             'https:',
             'http:',
             'api.telegram.org',
-            'api.liqpay.ua'
+            'api.monobank.ua',
+            'pay.monobank.ua',
+            // 'api.liqpay.ua', // LiqPay — commented, replaced by mono
           ],
           'frame-src': [
             "'self'",
             'editor.unlayer.com',
-            '*.liqpay.ua'
+            'pay.monobank.ua',
+            // '*.liqpay.ua', // LiqPay — commented, replaced by mono
           ],
           'script-src': [
             "'self'",
             "'unsafe-inline'",
             'editor.unlayer.com',
             'maps.googleapis.com',
-            '*.liqpay.ua'
+            'pay.monobank.ua',
+            // '*.liqpay.ua', // LiqPay — commented, replaced by mono
           ],
           'script-src-elem': [
             "'self'",
             "'unsafe-inline'",
             'editor.unlayer.com',
             'maps.googleapis.com',
-            '*.liqpay.ua'
+            'pay.monobank.ua',
+            // '*.liqpay.ua', // LiqPay — commented, replaced by mono
           ],
           'media-src': [
             "'self'",
@@ -60,7 +72,7 @@ module.exports = [
             'market-assets.strapi.io',
             'maps.gstatic.com',
             'maps.googleapis.com',
-            '*.liqpay.ua',
+            // '*.liqpay.ua', // LiqPay — commented, replaced by mono
             'khmdb0.google.com',
             'khmdb0.googleapis.com',
             'khmdb1.google.com',
@@ -83,15 +95,16 @@ module.exports = [
           ],
           'form-action': [
             "'self'",
-            '*.liqpay.ua'
+            // '*.liqpay.ua', // LiqPay — commented, replaced by mono
           ],
         },
       },
-      frameguard: {
-        enable: true,
-        policy: 'allow-from',
-        domains: ['*.liqpay.ua']
-      },
+      // frameguard liqpay — commented, replaced by mono
+      // frameguard: {
+      //   enable: true,
+      //   policy: 'allow-from',
+      //   domains: ['*.liqpay.ua']
+      // },
     },
   },
 ];

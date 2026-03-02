@@ -8,7 +8,8 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "webhook": "stripe listen --forward-to localhost:3000/api/webhooks"
+    "webhook": "stripe listen --forward-to localhost:3000/api/webhooks",
+    "mono:import-key": "node scripts/monopay-import-key.js"
   },
   "devDependencies": {},
   "dependencies": {

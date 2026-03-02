@@ -51,6 +51,9 @@
     "self_delivery": {
       "type": "boolean",
       "default": false
+    },
+    "mono_modified_date": {
+      "type": "biginteger"
     }
   }
 }
