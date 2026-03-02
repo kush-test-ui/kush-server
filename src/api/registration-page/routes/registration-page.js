@@ -1,9 +1,9 @@
 'use strict';
 
-/**
- * registration-page router
- */
-
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::registration-page.registration-page');
+module.exports = createCoreRouter('api::registration-page.registration-page', {
+  config: {
+    find: { auth: false },
+  },
+});

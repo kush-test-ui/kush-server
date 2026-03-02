@@ -1,16 +1,11 @@
 'use strict';
 
-module.exports = {
-  routes: [
-    {
-      method: 'GET',
-      path: '/home',
-      handler: 'home.find',
-      config: {
-        auth: false,
-        policies: [],
-        middlewares: [],
-      },
+const { createCoreRouter } = require('@strapi/strapi').factories;
+
+module.exports = createCoreRouter('api::home.home', {
+  config: {
+    find: {
+      auth: false,
     },
-  ],
-};
+  },
+});
