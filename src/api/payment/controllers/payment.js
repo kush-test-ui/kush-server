@@ -37,11 +37,9 @@
 // this module inputs ctx (Strapi/Koa), handles mono payment create (iframe invoice) and webhook callback, returns HTTP responses
 const crypto = require('crypto');
 
-const PAYMENT_RESULT_URL_UK = process.env.PAYMENT_RESULT_URL_UK
-  || process.env.PAYMENT_RESULT_URL
-  || 'https://www.kush.jewelry/uk/?checkout=success';
-const PAYMENT_RESULT_URL_EN = process.env.PAYMENT_RESULT_URL_EN || 'https://www.kush.jewelry/en/?checkout=success';
-const PAYMENT_WEBHOOK_URL = process.env.PAYMENT_WEBHOOK_URL || 'https://api.kush.jewelry/api/payment/callback';
+const PAYMENT_RESULT_URL_UK = 'https://www.kush.jewelry/uk/?checkout=success';
+const PAYMENT_RESULT_URL_EN = 'https://www.kush.jewelry/en/?checkout=success';
+const PAYMENT_WEBHOOK_URL = 'https://api.kush.jewelry/api/payment/callback';
 
 // mono status -> internal status mapping
 const MONO_STATUS_MAP = {
@@ -94,14 +92,15 @@ module.exports = {
       language,
     } = ctx.request.body;
 
-    if (!amount || !order_id) {
-      return ctx.send({ status: 400, message: 'Missing required fields: amount, order_id' });
+    const normalizedAmount = Number(amount);
+    if (!order_id || !Number.isFinite(normalizedAmount) || normalizedAmount <= 0) {
+      return ctx.send({ status: 400, message: 'Invalid required fields: amount, order_id' });
     }
 
     const monoService = strapi.service('api::payment.payment');
 
     // mono expects amount in kopecks (minimum units)
-    const amountKopecks = Math.round(parseFloat(amount) * 100);
+    const amountKopecks = Math.round(normalizedAmount * 100);
 
     const basketOrder = Array.isArray(products)
       ? products.map((p) => ({

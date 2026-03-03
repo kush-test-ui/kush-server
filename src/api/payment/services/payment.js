@@ -3,10 +3,10 @@
 // this module inputs {MONO_MERCHANT_TOKEN, MONO_API_URL, MONO_WIDGET_KEY_ID, MONO_WIDGET_PRIVATE_KEY}, provides mono acquiring helpers, returns service object
 const crypto = require('crypto');
 
-const MONO_API_URL = process.env.MONO_API_URL || 'https://api.monobank.ua';
-const MONO_MERCHANT_TOKEN = process.env.MONO_MERCHANT_TOKEN;
-const MONO_WIDGET_KEY_ID = process.env.MONO_WIDGET_KEY_ID;
-const MONO_WIDGET_PRIVATE_KEY = process.env.MONO_WIDGET_PRIVATE_KEY;
+const MONO_API_URL = 'https://api.monobank.ua';
+const MONO_MERCHANT_TOKEN = 'moDBams5IclNNjZU94zMP0A';
+const MONO_WIDGET_KEY_ID = 'CWVxG8NJWkE3E3';
+const MONO_WIDGET_PRIVATE_KEY = 'LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JR0hBZ0VBTUJNR0J5cUdTTTQ5QWdFR0NDcUdTTTQ5QXdFSEJHMHdhd0lCQVFRZzN4d09uckZkdHpNQUQrWFQKV0lLZUI3TXlWa3IreS82aEh3clFIOXVQR1Q2aFJBTkNBQVFBY1hxbGdQZjhRK2NUUjBpQzUzQnJ5ZVRaUTJqZQozak1admZVSHhwc3RUQ0hxZUdnN0UwS2NSUk5ycUlmeEZyS2t5ejQ5YkUycVUzdFdnNUxxa3VNYwotLS0tLUVORCBQUklWQVRFIEtFWS0tLS0t';
 
 // cached pubkey to avoid extra requests on every webhook
 let cachedPubKey = null;
