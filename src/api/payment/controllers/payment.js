@@ -93,8 +93,13 @@ module.exports = {
     } = ctx.request.body;
 
     const normalizedAmount = Number(amount);
-    if (!order_id || !Number.isFinite(normalizedAmount) || normalizedAmount <= 0) {
-      return ctx.send({ status: 400, message: 'Invalid required fields: amount, order_id' });
+    const issues = [];
+    if (!order_id) issues.push('order_id is missing');
+    if (!Number.isFinite(normalizedAmount)) issues.push(`amount is not a number (got ${amount})`);
+    else if (normalizedAmount <= 0) issues.push(`amount must be > 0 (got ${normalizedAmount})`);
+
+    if (issues.length) {
+      return ctx.send({ status: 400, message: `Validation failed: ${issues.join('; ')}` });
     }
 
     const monoService = strapi.service('api::payment.payment');
