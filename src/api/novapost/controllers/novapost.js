@@ -4,7 +4,7 @@ module.exports = {
   async getCities(ctx) {
     try {
       const apiKey =
-        process.env.NOVA_POSHTA_API_KEY || 'e27e9e15de8916a6eadcfc7bc6559f58';
+        process.env.NOVA_POSHTA_API_KEY || '85c11b6e84b976a5709251e1c89dfa60';
 
       const { page = '1', limit = '50', lang = 'en', search = '' } = ctx.query;
 
@@ -46,7 +46,8 @@ module.exports = {
     try {
       const { cityRef } = ctx.params;
       const { page = '1', limit = '50', search = '' } = ctx.query;
-      const apiKey = process.env.NOVA_POSHTA_API_KEY || 'e27e9e15de8916a6eadcfc7bc6559f58';
+      const apiKey =
+        process.env.NOVA_POSHTA_API_KEY || '85c11b6e84b976a5709251e1c89dfa60';
 
       const methodProperties = {
         CityRef: cityRef,
